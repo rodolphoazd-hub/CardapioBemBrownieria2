@@ -1,0 +1,2698 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brownieria - Cardápio Digital</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    /* ============================================
+       ARQUIVO: styles/base.css
+       Estilos base e reset do documento
+       ============================================ */
+    
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #2d1810 0%, #4a2c1f 100%);
+      min-height: 100%;
+      color: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/layout.css
+       Estrutura e layout principal
+       ============================================ */
+    
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #3d2817;
+      min-height: 100%;
+      position: relative;
+      padding-bottom: 80px;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/navbar.css
+       Estilos da barra de navegação superior
+       ============================================ */
+    
+    .top-navbar {
+      background: #2d1810;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #d4a574;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .status-badge.open {
+      background: rgba(37, 211, 102, 0.2);
+      color: #25d366;
+      border: 1px solid #25d366;
+    }
+
+    .status-badge.closed {
+      background: rgba(255, 68, 68, 0.2);
+      color: #ff4444;
+      border: 1px solid #ff4444;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .status-badge.open .status-dot {
+      background: #25d366;
+    }
+
+    .status-badge.closed .status-dot {
+      background: #ff4444;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .navbar-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .navbar-btn {
+      background: none;
+      border: none;
+      color: #d4a574;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .navbar-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .navbar-cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: #ff4444;
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/header.css
+       Estilos do cabeçalho principal
+       ============================================ */
+    
+    .header {
+      background: linear-gradient(135deg, #d4a574 0%, #b8956a 100%);
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 16px auto;
+      display: block;
+    }
+
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 32px;
+      font-weight: 700;
+      color: #2d1810;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 14px;
+      color: #4a2c1f;
+      font-weight: 400;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/navigation.css
+       Estilos do menu de navegação
+       ============================================ */
+    
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #2d1f1a;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-item {
+      background: none;
+      border: none;
+      color: #c9b8a8;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .nav-item.active {
+      background: #d4a574;
+      color: #2d1810;
+    }
+
+    .nav-item:hover {
+      color: #ffa500;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/pages/pages.css
+       Estilos das páginas e seções
+       ============================================ */
+    
+    .page-content {
+      display: none;
+    }
+
+    .page-content.active {
+      display: block;
+    }
+
+    .about-section {
+      padding: 20px;
+    }
+
+    .about-card {
+      background: #2d1f1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .about-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #d4a574;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .about-text {
+      font-size: 15px;
+      color: #c9b8a8;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .hours-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #4a3428;
+      color: #c9b8a8;
+      font-size: 14px;
+    }
+
+    .hours-item:last-child {
+      border-bottom: none;
+    }
+
+    .hours-day {
+      font-weight: 600;
+    }
+
+    .hours-time {
+      color: #d4a574;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 0.2s;
+    }
+
+    .social-link:hover {
+      transform: scale(1.05);
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/products.css
+       Estilos dos cards de produtos
+       ============================================ */
+    
+    .menu-section {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffd4a3;
+      margin: 0 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d4a574;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .product-card {
+      background: #2d1f1a;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:active {
+      transform: scale(0.98);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 140px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    .product-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #d4a574;
+    }
+
+    .product-description {
+      font-size: 12px;
+      color: #c9b8a8;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #3d2817;
+      padding: 6px;
+      border-radius: 20px;
+    }
+
+    .quantity-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: #d4a574;
+      color: #2d1810;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .quantity-btn:hover {
+      background: #c9956a;
+    }
+
+    .quantity-btn:disabled {
+      background: #4a3428;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .quantity-display {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .add-to-cart-btn {
+      background: #d4a574;
+      color: #1a0f0a;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #c9956a;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/cart.css
+       Estilos do carrinho de compras
+       ============================================ */
+    
+    .cart-float {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d4a574;
+      color: #2d1810;
+      padding: 16px 24px;
+      border-radius: 30px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      z-index: 1000;
+      transition: background 0.2s;
+      max-width: 90%;
+    }
+
+    .cart-float:hover {
+      background: #c9956a;
+    }
+
+    .cart-badge {
+      background: #2d1810;
+      color: #d4a574;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/modal.css
+       Estilos dos modais e overlays
+       ============================================ */
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #3d2817;
+      width: 100%;
+      max-width: 480px;
+      max-height: 85%;
+      border-radius: 20px 20px 0 0;
+      padding: 24px;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffd4a3;
+      margin: 0;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-item {
+      background: #2d1f1a;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 4px 0;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      color: #d4a574;
+      margin: 0;
+    }
+
+    .cart-item-quantity {
+      font-size: 14px;
+      color: #c9b8a8;
+      margin: 4px 0 0 0;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .cart-quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #3d2817;
+      padding: 4px 8px;
+      border-radius: 20px;
+    }
+
+    .cart-quantity-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: #d4a574;
+      color: #2d1810;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .cart-quantity-btn:hover {
+      background: #c9956a;
+    }
+
+    .cart-quantity-display {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background: #8b4513;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .remove-btn:hover {
+      background: #a0522d;
+    }
+
+    .cart-total {
+      background: #2d1f1a;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .cart-total-label {
+      font-size: 14px;
+      color: #c9b8a8;
+      margin: 0 0 8px 0;
+    }
+
+    .cart-total-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #d4a574;
+      margin: 0;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/forms.css
+       Estilos de formulários e inputs
+       ============================================ */
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffd4a3;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #4a3428;
+      border-radius: 8px;
+      background: #2d1f1a;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #d4a574;
+    }
+
+    .form-input::placeholder {
+      color: #6b5a4d;
+    }
+
+    .form-input option {
+      background: #2d1f1a;
+      color: #fff;
+      padding: 12px;
+    }
+
+    .form-input select {
+      cursor: pointer;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .checkout-btn:hover {
+      background: #20ba5a;
+    }
+
+    .checkout-btn:disabled {
+      background: #4a3428;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 40px 20px;
+      color: #c9b8a8;
+    }
+
+    .empty-cart-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+
+    .empty-cart-text {
+      font-size: 16px;
+      margin: 0;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/footer.css
+       Estilos do rodapé
+       ============================================ */
+    
+    .footer {
+      background: #0f0805;
+      padding: 24px 20px;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .footer-section {
+      margin-bottom: 20px;
+    }
+
+    .footer-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #d4a574;
+      margin: 0 0 12px 0;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #c9b8a8;
+      line-height: 1.6;
+      margin: 0 0 8px 0;
+    }
+
+    .footer-link {
+      color: #d4a574;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: left;
+      padding-top: 20px;
+      border-top: 1px solid #2d1f1a;
+      color: #6b5a4d;
+      font-size: 13px;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/components/notifications.css
+       Estilos de notificações e toasts
+       ============================================ */
+    
+    .toast-notification {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #25d366;
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.3s ease-out;
+      max-width: 90%;
+    }
+
+    .toast-notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      font-size: 24px;
+      animation: scaleIn 0.3s ease-out;
+    }
+
+    @keyframes scaleIn {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .daily-special-card {
+      background: linear-gradient(135deg, #d4a574 0%, #b8956a 100%);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .daily-special-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(-30%, -30%);
+      }
+    }
+
+    .daily-special-badge {
+      background: #ff4444;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    .daily-special-content {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .daily-special-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
+    }
+
+    .daily-special-info {
+      flex: 1;
+    }
+
+    .daily-special-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2d1810;
+      margin: 0 0 8px 0;
+    }
+
+    .daily-special-description {
+      font-size: 13px;
+      color: #4a2c1f;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
+
+    .daily-special-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .daily-special-prices {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .daily-special-old-price {
+      font-size: 14px;
+      color: #6b5a4d;
+      text-decoration: line-through;
+    }
+
+    .daily-special-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2d1810;
+    }
+
+    .daily-special-discount {
+      background: #ff4444;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .daily-special-btn {
+      background: #2d1810;
+      color: #d4a574;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .daily-special-btn:hover {
+      background: #1a0f0a;
+      transform: scale(1.05);
+    }
+
+    .chatbot-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d4a574 0%, #b8956a 100%);
+      color: #2d1810;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: all 0.3s;
+    }
+
+    .chatbot-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .chatbot-modal {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 380px;
+      max-width: calc(100vw - 40px);
+      z-index: 2001;
+      animation: slideUpChat 0.3s ease-out;
+    }
+
+    .chatbot-modal.active {
+      display: block;
+    }
+
+    @keyframes slideUpChat {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chatbot-container {
+      background: #3d2817;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 500px;
+    }
+
+    .chatbot-header {
+      background: linear-gradient(135deg, #d4a574 0%, #b8956a 100%);
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chatbot-avatar {
+      font-size: 32px;
+    }
+
+    .chatbot-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #2d1810;
+      margin: 0;
+    }
+
+    .chatbot-subtitle {
+      font-size: 12px;
+      color: #4a2c1f;
+      margin: 0;
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      background: #2d1f1a;
+      max-height: 300px;
+    }
+
+    .chatbot-message {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chatbot-message.user {
+      flex-direction: row-reverse;
+    }
+
+    .chatbot-message-avatar {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .chatbot-message-content {
+      background: #4a3428;
+      padding: 12px;
+      border-radius: 12px;
+      max-width: 80%;
+    }
+
+    .chatbot-message.user .chatbot-message-content {
+      background: #d4a574;
+    }
+
+    .chatbot-message-content p {
+      margin: 0;
+      font-size: 14px;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .chatbot-message.user .chatbot-message-content p {
+      color: #2d1810;
+    }
+
+    .chatbot-quick-questions {
+      padding: 16px;
+      background: #3d2817;
+      border-top: 1px solid #4a3428;
+    }
+
+    .quick-questions-title {
+      font-size: 12px;
+      color: #c9b8a8;
+      margin: 0 0 12px 0;
+      font-weight: 600;
+    }
+
+    .quick-questions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .quick-question-btn {
+      background: #2d1f1a;
+      color: #d4a574;
+      border: 1px solid #4a3428;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .quick-question-btn:hover {
+      background: #4a3428;
+      border-color: #d4a574;
+    }
+
+    .footer-logo {
+      float: left;
+      margin-right: 55px;
+      width: 156px;
+      height: 156px;
+      margin: 0 0 18px 0;
+      display: block;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* ============================================
+       ARQUIVO: styles/responsive.css
+       Media queries e responsividade
+       ============================================ */
+    
+    /* Mobile Optimizations */
+    @media (max-width: 480px) {
+      .navbar-brand {
+        font-size: 16px;
+        gap: 8px;
+      }
+
+      .navbar-logo {
+        width: 35px;
+        height: 35px;
+      }
+
+      .status-badge {
+        font-size: 10px;
+        padding: 3px 8px;
+        margin-left: 4px;
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+      }
+
+      .nav-menu {
+        gap: 12px;
+        padding: 10px 0;
+      }
+
+      .nav-item {
+        font-size: 13px;
+        padding: 6px 12px;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .products-grid {
+        gap: 10px;
+      }
+
+      .product-card {
+        padding: 10px;
+      }
+
+      .product-image {
+        height: 120px;
+      }
+
+      .product-name {
+        font-size: 14px;
+      }
+
+      .product-price {
+        font-size: 16px;
+      }
+
+      .product-description {
+        font-size: 11px;
+        -webkit-line-clamp: 2;
+      }
+
+      .cart-float {
+        bottom: 15px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+
+      .modal-content {
+        max-height: 90%;
+        padding: 20px;
+      }
+
+      .modal-title {
+        font-size: 20px;
+      }
+
+      .about-title {
+        font-size: 18px;
+      }
+
+      .about-text {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .navbar-brand span {
+        font-size: 14px;
+      }
+
+      .status-badge {
+        display: none;
+      }
+
+      .products-grid {
+        gap: 8px;
+      }
+
+      .product-card {
+        padding: 8px;
+      }
+
+      .product-image {
+        height: 100px;
+      }
+
+      .product-name {
+        font-size: 13px;
+      }
+
+      .product-price {
+        font-size: 15px;
+      }
+
+      .add-to-cart-btn {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <nav class="top-navbar">
+    <div class="navbar-brand"><img src="assets/logo.png" alt="Logo Brownieria" class="navbar-logo" onerror="this.style.display='none';"> <span id="navbar-brand-name">Bem Brownieria</span> <span class="status-badge" id="status-badge"> <span class="status-dot"></span> <span id="status-text">Aberto</span> </span>
+    </div>
+    <div class="navbar-actions"><button class="navbar-btn" onclick="openCart()" id="navbar-cart-btn"> 🛒 <span class="navbar-cart-badge" id="navbar-cart-badge" style="display: none;">0</span> </button>
+    </div>
+   </nav>
+   <nav class="nav-menu"><button class="nav-item active" onclick="showPage('menu')">Cardápio</button> <button class="nav-item" onclick="showPage('about')">Sobre</button>
+   </nav>
+   <div id="menu-page" class="page-content active">
+    <div class="menu-section">
+     <div class="daily-special-card">
+      <div class="daily-special-badge">
+       ⭐ BROWNIE DO DIA
+      </div>
+      <div class="daily-special-content"><img id="daily-special-image" src="assets/logo.png" alt="Brownie do Dia" class="daily-special-image" onerror="this.style.display='none';">
+       <div class="daily-special-info">
+        <h3 class="daily-special-name" id="daily-special-name">Carregando...</h3>
+        <p class="daily-special-description" id="daily-special-description">Carregando...</p>
+        <div class="daily-special-footer">
+         <div class="daily-special-prices"><span class="daily-special-old-price" id="daily-special-old-price">R$ 0,00</span> <span class="daily-special-price" id="daily-special-price">R$ 0,00</span> <span class="daily-special-discount">10% OFF</span>
+         </div><button class="daily-special-btn" onclick="addDailySpecialToCart()"> <span>🔥</span> <span>Aproveitar Oferta</span> </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="menu-section">
+     <h2 class="section-title">Brownies Clássicos</h2>
+     <div class="products-grid">
+      <div class="product-card"><img src="assets/tradicional.png" alt="Brownie Tradicional" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Tradicional</h3><span class="product-price">R$ 10,90</span>
+        </div>
+        <p class="product-description">Um brownie irresistível, feito com cacau 50% e pedaços de chocolate 50%, que realçam o sabor intenso e autêntico do chocolate nobre.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('tradicional')">−</button> <span class="quantity-display" id="qty-tradicional">0</span> <button class="quantity-btn" onclick="increaseQuantity('tradicional')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('tradicional', 'Brownie Tradicional', 10.90)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/brownie nuts.png" alt="Mix Nuts" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Mix Nuts </h3><span class="product-price">R$ 12,90</span>
+        </div>
+        <p class="product-description">Brownie de cacau 50% com nuts torrados e frutas secas- uma opção mais saudável, que unem o sabor intenso, crocância e equilíbrio nutritivo.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('nozes')">−</button> <span class="quantity-display" id="qty-nozes">0</span> <button class="quantity-btn" onclick="increaseQuantity('nozes')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('nozes', 'Brownie Mix Nuts', 12.90)">Adicionar</button>
+        </div>
+       </div>
+      </div>  
+     </div>
+
+
+     <h2 class="section-title">Brownies Recheados</h2>
+     <div class="products-grid">
+      <div class="product-card"><img src="assets/chocobjinho.png" alt="Brownie Beijinho" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Beijinho</h3><span class="product-price">R$ 17,00</span>
+        </div>
+        <p class="product-description">Brownie intenso de chocolate, leite de coco e flocos de coco, recheado com beijinho de colher, em um sabor marcante do cacau e a suavidade do coco.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('docedeleite')">−</button> <span class="quantity-display" id="qty-docedeleite">0</span> <button class="quantity-btn" onclick="increaseQuantity('docedeleite')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('docedeleite', 'Brownie Doce de Leite', 17.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/Brigadeiro.png" alt="Brownie Brigadeiro" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Brigadeiro</h3><span class="product-price">R$ 17,00</span>
+        </div>
+        <p class="product-description">Brownie recheado com brigadeiro cremoso de chocolate meio amargo 50%, realçando o sabor  do chocolate nobre.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('nutella')">−</button> <span class="quantity-display" id="qty-nutella">0</span> <button class="quantity-btn" onclick="increaseQuantity('nutella')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('nutella', 'Brownie Brigadeiro', 17.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/docedeleite.png" alt="Doce de Leite" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie de Doce de Leite</h3><span class="product-price">R$ 19,00</span>
+        </div>
+        <p class="product-description">Brownie clássico de chocolate nobre, com um recheio generoso de doce de leite artesanal.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('ninho')">−</button> <span class="quantity-display" id="qty-ninho">0</span> <button class="quantity-btn" onclick="increaseQuantity('ninho')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('ninho', 'Doce de Leite', 19.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/ninho nutela.png" alt="Ninho & Creme de avelãs" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Ninho & Creme de avelãs</h3><span class="product-price">R$ 19,00</span>
+        </div>
+        <p class="product-description">Brownie recheado com uma mistura irresistível de creme trufado de Ninho e o toque de creme de avelãs.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('brigadeiro')">−</button> <span class="quantity-display" id="qty-brigadeiro">0</span> <button class="quantity-btn" onclick="increaseQuantity('brigadeiro')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('brigadeiro', 'Ninho & Creme de avelãs', 19.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+     </div>
+
+
+
+     <h2 class="section-title">Brownies Especiais</h2>
+     <div class="products-grid">
+      <div class="product-card"><img src="assets/brookie.png" alt="Brownie Oreo" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Brookie</h3><span class="product-price">R$ 14,00</span>
+        </div>
+        <p class="product-description">Brownie + Cookie= base de cookie e massa de brownie, feito com açúcar mascavo e chocolate 70%, recheado com gotas de chocolate.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('oreo')">−</button> <span class="quantity-display" id="qty-oreo">0</span> <button class="quantity-btn" onclick="increaseQuantity('oreo')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('oreo', 'Brownie Brookie', 14.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/nutella.png" alt="Brownie Nutelíssimo" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Nutelíssimo</h3><span class="product-price">R$ 15,00</span>
+        </div>
+        <p class="product-description">Brownie intenso de chocolate amargo,  recheado com creme bueno e castanhas picadas no topo.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('maracuja')">−</button> <span class="quantity-display" id="qty-maracuja">0</span> <button class="quantity-btn" onclick="increaseQuantity('maracuja')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('maracuja', 'Brownie Nutelíssimo', 15.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/ferrero.png" alt="Brownie Bueníssimo" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Bueníssimo</h3><span class="product-price">R$ 13,00</span>
+        </div>
+        <p class="product-description">Brownie de chocolate branco com recheio cremoso de maracujá. O equilíbrio perfeito entre o doce e o azedinho da fruta. Refrescante e delicioso!</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('maracuja')">−</button> <span class="quantity-display" id="qty-maracuja">0</span> <button class="quantity-btn" onclick="increaseQuantity('maracuja')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('maracuja', 'Brownie Maracujá', 13.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/red.png" alt="Brownie RedVelvet Cream Chesse" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie RedVelvet Cream Chesse</h3><span class="product-price">R$ 17,00</span>
+        </div>
+        <p class="product-description">Brownie inspirado no famoso Red Velvet com creme de cream cheese, delicadamente saborizado com raspas de limão.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('maracuja')">−</button> <span class="quantity-display" id="qty-maracuja">0</span> <button class="quantity-btn" onclick="increaseQuantity('maracuja')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('maracuja', 'Brownie RedVelvet Cream Chesse', 17.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/geleia de morango.png" alt="Brownie Blondie com Morango" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Blondie com Morango </h3><span class="product-price">R$ 17,00</span>
+        </div>
+        <p class="product-description">Brownie de chocolate branco (blondie) com geleia artesanal de morango e pedaços de chocolate branco no topo.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('redvelvet')">−</button> <span class="quantity-display" id="qty-redvelvet">0</span> <button class="quantity-btn" onclick="increaseQuantity('redvelvet')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('redvelvet', 'Brownie Blondie com Morango', 17.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+      <div class="product-card"><img src="assets/pistache.png" alt="Brownie Morango" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Brownie Pistacchio</h3><span class="product-price">R$ 18,00</span>
+        </div>
+        <p class="product-description">Brownie intenso de chocolate amargo, com pistache torrados e creme de pistache no topo.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('morango')">−</button> <span class="quantity-display" id="qty-morango">0</span> <button class="quantity-btn" onclick="increaseQuantity('morango')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('morango', 'Brownie Pistacchio', 18.00)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <h2 class="section-title">Bites de Brownies</h2>
+     <div class="products-grid">
+      <div class="product-card"><img src="assets/Bites de brownies.jpg" alt="Bites Tradicional" class="product-image" onerror="this.style.display='none';">
+       <div class="product-content">
+        <div class="product-header">
+         <h3 class="product-name">Bites Tradicional</h3><span class="product-price">R$ 15,00</span>
+        </div>
+        <p class="product-description">Porção com 10 mini brownies tradicionais. Perfeitos para compartilhar ou saborear aos poucos! Embalagem especial para presente.</p>
+        <div class="product-actions">
+         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('bites-tradicional')">−</button> <span class="quantity-display" id="qty-bites-tradicional">0</span> <button class="quantity-btn" onclick="increaseQuantity('bites-tradicional')">+</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('bites-tradicional', 'Bites Tradicional', 13.90)">Adicionar</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   
+
+   <!-- ============================================
+         PÁGINA: Sobre a Loja
+         ARQUIVO: pages/about.html
+    ============================================ -->
+
+
+   <div id="about-page" class="page-content">
+    <div class="about-section"><!-- Card: Nossa História -->
+     <div class="about-card">
+      <h3 class="about-title">📖 Nossa História</h3>
+      <p class="about-text" id="about-story"> Nossa História - Bem Brownieria
+
+A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alta qualidade. Desde o começo, a missão foi simples: oferecer uma experiência única em cada mordida, levando para cada cliente o sabor que combina tradição e inovação.</p>
+     </div><!-- Card: Horário de Funcionamento -->
+     <div class="about-card">
+      <h3 class="about-title">🕐 Horário de Funcionamento</h3>
+      <ul class="hours-list">
+       <li class="hours-item"><span class="hours-day">Segunda a Sexta</span> <span class="hours-time" id="weekday-hours">10h - 20h</span></li>
+       <li class="hours-item"><span class="hours-day">Sábado</span> <span class="hours-time" id="saturday-hours">Fechado</span></li>
+       <li class="hours-item"><span class="hours-day">Domingo</span> <span class="hours-time" id="sunday-hours">Fechado</span></li>
+      </ul>
+     </div><!-- Card: Redes Sociais -->
+     <div class="about-card">
+      <h3 class="about-title">📱 Redes Sociais</h3>
+      <p class="about-text" style="margin-bottom: 20px;">Siga-nos no Instagram para ver novidades, promoções e os bastidores da nossa produção!</p><a href="https://www.instagram.com/bem.brownieria?igsh=NHk3MzRyd2ZzN3Rr" target="_blank" rel="noopener noreferrer" class="social-link" id="instagram-link" style="display: flex; width: fit-content;"> <span>📸</span> <span id="instagram-handle">@bem.brownieria</span> </a>
+     </div><!-- Card: Localização -->
+     <div class="about-card">
+      <h3 class="about-title">📍 Localização</h3>
+      <p class="about-text" id="location-text">Fazemos entregas! Consulte disponibilidade pelo WhatsApp!</p>
+     </div>
+    </div>
+   </div>
+   <footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <img src="assets/logo.png" alt="Logo Brownieria" class="footer-logo" onerror="this.style.display='none';">
+      <h4 class="footer-title">Bem Brownieria</h4>
+      <p class="footer-text" id="footer-description">Momentos doces pedem Bem Brownieria</p>
+    </div>
+    <div class="footer-section">
+      <h4 class="footer-title">Contato</h4>
+      <p class="footer-text">WhatsApp: <a href="#" class="footer-link" id="footer-whatsapp">(21)965501182</a></p>
+      <p class="footer-text">Instagram: <a href="https://www.instagram.com/bem.brownieria?igsh=NHk3MzRyd2ZzN3Rr" target="_blank" rel="noopener noreferrer" class="footer-link" id="footer-instagram">@bem.brownieria</a></p>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-text">© 2025 Bem Brownieria - Feito com amor e Brownie</p>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div class="cart-float" id="cart-float" onclick="openCart()" style="display: none;"><span>🛒</span> <span>Ver Carrinho</span> <span class="cart-badge" id="cart-count">0</span>
+  </div><button class="chatbot-float" onclick="toggleChatbot()"> <span id="chatbot-icon">🐱‍👓</span> </button>
+  <div class="toast-notification" id="toast-notification"><span class="toast-icon">✓</span> <span id="toast-message">Item adicionado ao carrinho!</span>
+  </div>
+  <div class="modal" id="cart-modal">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h2 class="modal-title">Seu Pedido</h2><button class="close-btn" onclick="closeCart()">×</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="cart-total">
+     <p class="cart-total-label">Código do Pedido</p>
+     <p class="cart-total-value" id="order-code" style="font-size: 18px; color: #ffd4a3; margin-bottom: 16px;">---</p>
+     <div style="border-top: 1px solid #4a3428; padding-top: 12px; margin-top: 12px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+       <p style="margin: 0; font-size: 14px; color: #c9b8a8;">Subtotal dos Produtos</p>
+       <p style="margin: 0; font-size: 14px; color: #c9b8a8;" id="cart-subtotal">R$ 0,00</p>
+      </div>
+      <div id="delivery-fee-line" style="display: none; justify-content: space-between; margin-bottom: 12px;">
+       <p style="margin: 0; font-size: 14px; color: #c9b8a8;">Taxa de Entrega</p>
+       <p style="margin: 0; font-size: 14px; color: #c9b8a8;" id="cart-delivery-fee">R$ 0,00</p>
+      </div>
+     </div>
+     <p class="cart-total-label">Total do Pedido</p>
+     <p class="cart-total-value" id="cart-total">R$ 0,00</p>
+    </div>
+    <form id="checkout-form" onsubmit="sendToWhatsApp(event)">
+     <div class="form-group"><label class="form-label" for="customer-name">Seu Nome</label> <input type="text" id="customer-name" class="form-input" placeholder="Digite seu nome" required>
+     </div>
+     <div class="form-group"><label class="form-label" for="customer-cep">CEP</label> <input type="text" id="customer-cep" class="form-input" placeholder="00000-000" maxlength="9" required>
+      <p id="cep-error" style="color: #ff4444; font-size: 12px; margin: 4px 0 0 0; display: none;">Desculpe, só entregamos no Rio de Janeiro (RJ)</p>
+     </div>
+     <div class="form-group"><label class="form-label" for="customer-address">Endereço de Entrega</label> <input type="text" id="customer-address" class="form-input" placeholder="Rua, número, bairro" required>
+     </div>
+     <div class="form-group"><label class="form-label" for="customer-complement">Complemento (Opcional)</label> <input type="text" id="customer-complement" class="form-input" placeholder="Apartamento, bloco, ponto de referência, etc.">
+     </div>
+     <div class="form-group"><label class="form-label" for="address-type">Tipo de Endereço</label> <select id="address-type" class="form-input" required> <option value="">Selecione o tipo de endereço</option> <option value="casa">🏠 Casa</option> <option value="trabalho">💼 Trabalho</option> <option value="outros">📍 Outros</option> </select>
+     </div>
+     <div class="form-group"><label class="form-label" for="delivery-type">Tipo de Entrega</label> <select id="delivery-type" class="form-input" required onchange="handleDeliveryTypeChange(this.value)"> <option value="">Selecione o tipo de entrega</option> <option value="uber">🚗 Uber Envios</option> <option value="combinar">💬 A Combinar com Vendedor</option> </select>
+     </div>
+     <div id="delivery-fee-container" style="display: none; background: #2d1f1a; border-radius: 12px; padding: 16px; margin: 20px 0; border-left: 4px solid #d4a574;">
+      <p style="margin: 0; font-size: 14px; color: #ffd4a3; font-weight: 600; margin-bottom: 8px;">🚗 Taxa de Entrega Uber Envios</p>
+      <p id="delivery-fee-text" style="margin: 0; font-size: 18px; color: #d4a574; font-weight: 700;">Calculando...</p>
+      <p style="margin: 8px 0 0 0; font-size: 12px; color: #c9b8a8;">A taxa será calculada pelo sistema da Uber ao finalizar</p>
+      <p style="margin: 8px 0 0 0; font-size: 12px; color: #ffd4a3; font-weight: 600;">⚠️ A taxa de entrega será somada ao preço dos produtos</p>
+     </div>
+     <div id="delivery-info-combinar" style="display: none; background: #2d1f1a; border-radius: 12px; padding: 16px; margin: 20px 0; border-left: 4px solid #d4a574;">
+      <p style="margin: 0; font-size: 14px; color: #ffd4a3; font-weight: 600; margin-bottom: 8px;">📦 Informações de Entrega</p>
+      <p style="margin: 0; font-size: 13px; color: #c9b8a8; line-height: 1.6;">A entrega é a combinar. Converse com nossos vendedores para combinar o formato de entrega que melhor atende você!</p>
+     </div>
+     <div class="form-group"><label class="form-label" for="customer-phone">Telefone</label> <input type="tel" id="customer-phone" class="form-input" placeholder="(00) 00000-0000" required>
+     </div>
+     <div class="form-group"><label class="form-label" for="payment-method">Forma de Pagamento</label> <select id="payment-method" class="form-input" required> <option value="">Selecione uma opção</option> <option value="pix">💰 PIX</option> <option value="debito">💳 Cartão de Débito</option> <option value="credito">💳 Cartão de Crédito</option> </select>
+     </div>
+     <div class="form-group"><label class="form-label" for="order-notes">Observações (Opcional)</label> <textarea id="order-notes" class="form-input" placeholder="Ex: Sem nozes, retirar às 15h, etc." rows="3" style="resize: vertical; min-height: 60px;"></textarea>
+     </div>
+     <div id="minimum-order-warning" style="display: none; background: #8b4513; border-radius: 12px; padding: 16px; margin: 20px 0; border-left: 4px solid #ff4444;">
+      <p style="margin: 0; font-size: 14px; color: #fff; font-weight: 600; margin-bottom: 8px;">⚠️ Pedido Mínimo Não Atingido</p>
+      <p style="margin: 0; font-size: 13px; color: #ffd4a3; line-height: 1.6;">O valor mínimo para pedidos é de R$ 30,00. Adicione mais itens ao carrinho!</p>
+     </div><button type="submit" class="checkout-btn" id="checkout-btn"> <span>📱</span> <span>Finalizar no WhatsApp</span> </button>
+    </form>
+   </div>
+  </div>
+  <div class="chatbot-modal" id="chatbot-modal">
+   <div class="chatbot-container">
+    <div class="chatbot-header">
+     <div class="chatbot-header-info"><span class="chatbot-avatar">🐱‍👓</span>
+      <div>
+       <h3 class="chatbot-title">Bem, Assistente Virtual</h3>
+       <p class="chatbot-subtitle">seu amigo aqui!</p> 
+      </div>
+     </div><button class="close-btn" onclick="toggleChatbot()">×</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+     <div class="chatbot-message bot">
+      <div class="chatbot-message-avatar">
+       🐱‍👓
+      </div>
+      <div class="chatbot-message-content">
+       <p>🐱‍👓Oi eu sou o Bem , seu assistente da Bem Brownieria. Como posso ajudar você hoje?</p>
+      </div>
+     </div>
+    </div>
+    <div class="chatbot-quick-questions">
+     <p class="quick-questions-title">Perguntas frequentes:</p>
+     <div class="quick-questions-grid"><button class="quick-question-btn" onclick="askQuestion('horario')">🕐 Horário</button> <button class="quick-question-btn" onclick="askQuestion('entrega')">🚚 Entrega</button> <button class="quick-question-btn" onclick="askQuestion('pagamento')">💳 Pagamento</button> <button class="quick-question-btn" onclick="askQuestion('ingredientes')">🥜 Ingredientes</button> <button class="quick-question-btn" onclick="askQuestion('validade')">📅 Validade</button> <button class="quick-question-btn" onclick="askQuestion('pedido')">📦 Pedido Mínimo</button> <button class="quick-question-btn" onclick="openWhatsApp()" style="background: linear-gradient(135deg, #25d366, #20ba5a); color: #fff; border-color: #25d366;">📱 Falar no WhatsApp</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+   
+    
+    const defaultConfig = {
+      store_name: "Bem Brownieria",
+      store_tagline: "Brownies artesanais feitos com amor",
+      whatsapp_number: "5521965501182",
+      instagram_handle: "@bem.brownieria",
+      weekday_hours: "09h - 18h",
+      saturday_hours: "Fechado",
+      sunday_hours: "Fechado",
+      about_story: "A Bem Brownieria nasceu da paixão por criar brownies artesanais de alta qualidade. Cada receita é cuidadosamente desenvolvida para proporcionar a melhor experiência em cada mordida. Usamos apenas ingredientes selecionados e chocolate belga premium.",
+      location_text: "Fazemos entregas nos bairros: Abolição, Água Santa, Campinho, Cascadura, Madureira, Piedade, Pilares, Quintino, Sulacap e Valqueire.",
+      footer_description: "Brownies artesanais feitos com amor e ingredientes de qualidade.",
+      footer_text: "© 2025 Bem Brownieria - Feito com amor e Brownies"
+    };
+
+    // Estado global da aplicação
+    let config = { ...defaultConfig };
+    let cart = [];
+    let quantities = {};
+    let dailySpecial = null;
+    let orderCode = null;
+    let deliveryFee = 0;
+    let deliveryType = '';
+
+    /**
+     * Gera um código único para o pedido
+     * Formato: BRW-YYYYMMDD-XXXX (ex: BRW-20240115-A3F9)
+     * @returns {string} - Código do pedido
+     */
+    function generateOrderCode() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      
+      // Gerar 4 caracteres aleatórios (letras e números)
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let randomCode = '';
+      for (let i = 0; i < 4; i++) {
+        randomCode += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      
+      return `BRW-${year}${month}${day}-${randomCode}`;
+    }
+
+    const dailySpecials = [
+      {
+        id: 'tradicional',
+        name: 'Brownie Tradicional',
+        description: 'Um brownie irresistível, feito com cacau 50% e pedaços de chocolate 50%, que realçam o sabor intenso e autêntico do chocolate nobre.',
+        price: 10.90,
+        image: 'assets/tradicional.png'
+      },
+      {
+        id: 'nutella',
+        name: 'Brownie Nutella',
+        description: 'Brownie intenso de chocolate amargo,  recheado com creme bueno e castanhas picadas no topo.',
+        price: 15.00,
+        image: 'assets/nutella.png'
+      },
+      {
+        id: 'docedeleite',
+        name: 'Brownie Doce de Leite',
+        description: 'Brownie clássico de chocolate nobre, com um recheio generoso de doce de leite artesanal.',
+        price: 19.00,
+        image: 'assets/docedeleite.png'
+      },
+      {
+        id: 'oreo',
+        name: 'Brownie Brookie',
+        description: 'Brownie + Cookie= base de cookie e massa de brownie, feito com açúcar mascavo e chocolate 70%, recheado com gotas de chocolate..',
+        price: 14.00,
+        image: 'assets/brookie.png'
+      },
+      {
+        id: 'redvelvet',
+        name: 'Brownie Red Velvet',
+        description: 'Brownie vermelho aveludado com toque suave de cacau e recheio de cream cheese.',
+        price: 17.00,
+        image: 'assets/nutella.png'
+      }
+    ];
+
+    function getDailySpecial() {
+      const today = new Date();
+      const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+      const index = dayOfYear % dailySpecials.length;
+      return dailySpecials[index];
+    }
+
+    function updateDailySpecial() {
+      dailySpecial = getDailySpecial();
+      const discountedPrice = dailySpecial.price * 0.9;
+      
+      document.getElementById('daily-special-image').src = dailySpecial.image;
+      document.getElementById('daily-special-name').textContent = dailySpecial.name;
+      document.getElementById('daily-special-description').textContent = dailySpecial.description;
+      document.getElementById('daily-special-old-price').textContent = `R$ ${dailySpecial.price.toFixed(2).replace('.', ',')}`;
+      document.getElementById('daily-special-price').textContent = `R$ ${discountedPrice.toFixed(2).replace('.', ',')}`;
+    }
+
+    function addDailySpecialToCart() {
+      if (!dailySpecial) return;
+      
+      const discountedPrice = dailySpecial.price * 0.9;
+      const existingItem = cart.find(item => item.id === `daily-${dailySpecial.id}`);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: `daily-${dailySpecial.id}`,
+          name: `${dailySpecial.name} (Oferta do Dia)`,
+          price: discountedPrice,
+          quantity: 1
+        });
+      }
+      
+      showToast(`${dailySpecial.name} adicionado com 20% OFF! 🔥`);
+      updateCartDisplay();
+    }
+
+    updateDailySpecial();
+
+    // ==========================================
+    // SEÇÃO: Gerenciamento de Status da Loja
+    // ARQUIVO: scripts/store-status.js
+    // ==========================================
+    
+    /**
+     * Verifica se a loja está aberta no momento atual
+     * @returns {boolean} - true se a loja está aberta, false se está fechada
+     */
+    function isStoreOpen() {
+      const now = new Date();
+      const day = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const currentTime = hours * 60 + minutes;
+
+      if (day === 0) {
+        // Domingo - Fechado
+        return false;
+      } else if (day >= 1 && day <= 5) {
+        // Segunda a Sexta: 09h - 18h
+        const openTime = 10 * 60; // 09:00
+        const closeTime = 20 * 60; // 18:00
+        return currentTime >= openTime && currentTime < closeTime;
+      } else if (day === 6) {
+        // Sábado: 10h - 18h
+        const openTime = 10 * 60; // 10:00
+        const closeTime = 18 * 60; // 18:00
+        return currentTime >= openTime && currentTime < closeTime;
+      }
+      
+      return false;
+    }
+
+    /**
+     * Verifica se a loja está aberta com base no horário atual
+     * e atualiza o badge de status na interface
+     */
+    function checkStoreStatus() {
+      const statusBadge = document.getElementById('status-badge');
+      const statusText = document.getElementById('status-text');
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      const isOpen = isStoreOpen();
+
+      // Atualizar UI com o status
+      if (isOpen) {
+        statusBadge.classList.remove('closed');
+        statusBadge.classList.add('open');
+        statusText.textContent = 'Loja Aberta';
+        if (checkoutBtn) {
+          checkoutBtn.disabled = false;
+        }
+      } else {
+        statusBadge.classList.remove('open');
+        statusBadge.classList.add('closed');
+        statusText.textContent = 'Loja Fechada';
+        if (checkoutBtn) {
+          checkoutBtn.disabled = true;
+        }
+      }
+    }
+
+    // Verificar status ao carregar e a cada minuto
+    checkStoreStatus();
+    setInterval(checkStoreStatus, 60000);
+
+    // ==========================================
+    // SEÇÃO: Navegação entre Páginas
+    // ARQUIVO: scripts/navigation.js
+    // ==========================================
+    
+    /**
+     * Alterna entre as páginas do menu (Cardápio e Sobre)
+     * @param {string} pageName - Nome da página ('menu' ou 'about')
+     */
+    function showPage(pageName) {
+      // Remover classe 'active' de todas as páginas
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      // Remover classe 'active' de todos os itens do menu
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Ativar a página selecionada
+      document.getElementById(`${pageName}-page`).classList.add('active');
+      event.target.classList.add('active');
+      
+      // Rolar para o topo suavemente
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // SEÇÃO: Gerenciamento de Produtos
+    // ARQUIVO: scripts/products.js
+    // ==========================================
+    
+    /**
+     * Aumenta a quantidade de um produto
+     * @param {string} productId - ID do produto
+     */
+    function increaseQuantity(productId) {
+      if (!quantities[productId]) quantities[productId] = 0;
+      quantities[productId]++;
+      document.getElementById(`qty-${productId}`).textContent = quantities[productId];
+    }
+
+    /**
+     * Diminui a quantidade de um produto
+     * @param {string} productId - ID do produto
+     */
+    function decreaseQuantity(productId) {
+      if (!quantities[productId] || quantities[productId] === 0) return;
+      quantities[productId]--;
+      document.getElementById(`qty-${productId}`).textContent = quantities[productId];
+    }
+
+    // ==========================================
+    // SEÇÃO: Notificações Toast
+    // ARQUIVO: scripts/notifications.js
+    // ==========================================
+    
+    /**
+     * Exibe uma notificação toast temporária
+     * @param {string} message - Mensagem a ser exibida
+     */
+    function showToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const toastMessage = document.getElementById('toast-message');
+      
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // ==========================================
+    // SEÇÃO: Gerenciamento do Carrinho
+    // ARQUIVO: scripts/cart.js
+    // ==========================================
+    
+    /**
+     * Adiciona um produto ao carrinho
+     * @param {string} productId - ID do produto
+     * @param {string} productName - Nome do produto
+     * @param {number} productPrice - Preço do produto
+     */
+    function addToCart(productId, productName, productPrice) {
+      const quantity = quantities[productId] || 0;
+      if (quantity === 0) return;
+
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({
+          id: productId,
+          name: productName,
+          price: productPrice,
+          quantity: quantity
+        });
+      }
+
+      // Mostrar notificação
+      showToast(`${quantity}x ${productName} adicionado ao carrinho! 🎉`);
+
+      // Resetar quantidade do produto
+      quantities[productId] = 0;
+      document.getElementById(`qty-${productId}`).textContent = '0';
+      
+      updateCartDisplay();
+    }
+
+    /**
+     * Remove um produto do carrinho
+     * @param {string} productId - ID do produto
+     */
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      
+      // Se o carrinho ficar vazio, resetar o código do pedido
+      if (cart.length === 0) {
+        orderCode = null;
+      }
+      
+      updateCartDisplay();
+    }
+
+    /**
+     * Aumenta a quantidade de um item no carrinho
+     * @param {string} productId - ID do produto
+     */
+    function increaseCartQuantity(productId) {
+      const item = cart.find(item => item.id === productId);
+      if (item) {
+        item.quantity++;
+        updateCartDisplay();
+      }
+    }
+
+    /**
+     * Diminui a quantidade de um item no carrinho
+     * @param {string} productId - ID do produto
+     */
+    function decreaseCartQuantity(productId) {
+      const item = cart.find(item => item.id === productId);
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity--;
+          updateCartDisplay();
+        } else {
+          removeFromCart(productId);
+        }
+      }
+    }
+
+    /**
+     * Atualiza a exibição do carrinho na interface
+     */
+    function updateCartDisplay() {
+      const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const cartTotal = cartSubtotal + deliveryFee;
+      const MINIMUM_ORDER = 30.00;
+
+      // Atualizar contador do carrinho
+      document.getElementById('cart-count').textContent = cartCount;
+      document.getElementById('cart-subtotal').textContent = `R$ ${cartSubtotal.toFixed(2).replace('.', ',')}`;
+      document.getElementById('cart-total').textContent = `R$ ${cartTotal.toFixed(2).replace('.', ',')}`;
+      
+      // Mostrar/ocultar linha de taxa de entrega
+      const deliveryFeeLine = document.getElementById('delivery-fee-line');
+      const cartDeliveryFee = document.getElementById('cart-delivery-fee');
+      if (deliveryFee > 0) {
+        deliveryFeeLine.style.display = 'flex';
+        cartDeliveryFee.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
+      } else {
+        deliveryFeeLine.style.display = 'none';
+      }
+      
+      // Gerar código do pedido se houver itens e ainda não existir
+      if (cartCount > 0 && !orderCode) {
+        orderCode = generateOrderCode();
+      }
+      
+      // Resetar código se carrinho estiver vazio
+      if (cartCount === 0) {
+        orderCode = null;
+      }
+      
+      // Atualizar código do pedido
+      const orderCodeElement = document.getElementById('order-code');
+      if (orderCode && cartCount > 0) {
+        orderCodeElement.textContent = orderCode;
+      } else {
+        orderCodeElement.textContent = '---';
+      }
+
+      // Verificar pedido mínimo e atualizar aviso
+      const minimumOrderWarning = document.getElementById('minimum-order-warning');
+      const isBelowMinimum = cartSubtotal > 0 && cartSubtotal < MINIMUM_ORDER;
+      
+      if (minimumOrderWarning) {
+        if (isBelowMinimum) {
+          const remaining = MINIMUM_ORDER - cartSubtotal;
+          minimumOrderWarning.querySelector('p:last-child').innerHTML = 
+            `O valor mínimo para pedidos é de R$ 30,00. Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para atingir o mínimo!`;
+          minimumOrderWarning.style.display = 'block';
+        } else {
+          minimumOrderWarning.style.display = 'none';
+        }
+      }
+
+      // Atualizar estado do botão de checkout baseado no horário E pedido mínimo
+      const checkoutBtn = document.getElementById('checkout-btn');
+      if (checkoutBtn) {
+        const canCheckout = isStoreOpen() && !isBelowMinimum;
+        checkoutBtn.disabled = !canCheckout;
+        
+        if (isBelowMinimum && cartCount > 0) {
+          checkoutBtn.style.opacity = '0.5';
+          checkoutBtn.style.cursor = 'not-allowed';
+        } else {
+          checkoutBtn.style.opacity = '1';
+          checkoutBtn.style.cursor = 'pointer';
+        }
+      }
+
+      // Atualizar badge na navbar
+      const navbarBadge = document.getElementById('navbar-cart-badge');
+      if (cartCount > 0) {
+        navbarBadge.textContent = cartCount;
+        navbarBadge.style.display = 'flex';
+      } else {
+        navbarBadge.style.display = 'none';
+      }
+
+      // Mostrar/ocultar botão flutuante
+      const cartFloat = document.getElementById('cart-float');
+      if (cartCount > 0) {
+        cartFloat.style.display = 'flex';
+      } else {
+        cartFloat.style.display = 'none';
+      }
+
+      // Renderizar itens do carrinho
+      const cartItemsContainer = document.getElementById('cart-items');
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <p class="empty-cart-text">Seu carrinho está vazio</p>
+          </div>
+        `;
+      } else {
+        cartItemsContainer.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <h4 class="cart-item-name">${item.name}</h4>
+              <p class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')} cada</p>
+              <p class="cart-item-quantity">Subtotal: R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</p>
+            </div>
+            <div class="cart-item-controls">
+              <div class="cart-quantity-control">
+                <button class="cart-quantity-btn" onclick="decreaseCartQuantity('${item.id}')">−</button>
+                <span class="cart-quantity-display">${item.quantity}</span>
+                <button class="cart-quantity-btn" onclick="increaseCartQuantity('${item.id}')">+</button>
+              </div>
+              <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remover</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    /**
+     * Abre o modal do carrinho
+     */
+    function openCart() {
+      document.getElementById('cart-modal').classList.add('active');
+    }
+
+    /**
+     * Fecha o modal do carrinho
+     */
+    function closeCart() {
+      document.getElementById('cart-modal').classList.remove('active');
+    }
+
+    /**
+     * Abre o WhatsApp para contato direto com a loja
+     */
+    function openWhatsApp() {
+      const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+      const message = `Olá! Vim pelo cardápio digital da ${config.store_name || defaultConfig.store_name} 😊`;
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    // ==========================================
+    // SEÇÃO: Validação de CEP
+    // ARQUIVO: scripts/cep-validation.js
+    // ==========================================
+    
+    /**
+     * Inicializa os event listeners para formatação do CEP
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+      const cepInput = document.getElementById('customer-cep');
+      
+      // Formatar CEP enquanto digita (00000-000)
+      cepInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 5) {
+          value = value.slice(0, 5) + '-' + value.slice(5, 8);
+        }
+        e.target.value = value;
+      });
+
+      // Validar CEP quando o campo perde o foco
+      cepInput.addEventListener('blur', function() {
+        validateCEP();
+      });
+    });
+
+    /**
+     * Manipula a mudança do tipo de entrega
+     * Exibe informações relevantes baseado na escolha do usuário
+     * @param {string} type - Tipo de entrega selecionado
+     */
+    function handleDeliveryTypeChange(type) {
+      const deliveryFeeContainer = document.getElementById('delivery-fee-container');
+      const deliveryInfoCombinar = document.getElementById('delivery-info-combinar');
+      
+      deliveryType = type;
+      
+      if (deliveryType === 'uber') {
+        deliveryFeeContainer.style.display = 'block';
+        deliveryInfoCombinar.style.display = 'none';
+        calculateDeliveryFee();
+      } else if (deliveryType === 'combinar') {
+        deliveryFeeContainer.style.display = 'none';
+        deliveryInfoCombinar.style.display = 'block';
+        deliveryFee = 0;
+        updateCartDisplay();
+      } else {
+        deliveryFeeContainer.style.display = 'none';
+        deliveryInfoCombinar.style.display = 'none';
+        deliveryFee = 0;
+        updateCartDisplay();
+      }
+    }
+
+    /**
+     * Calcula a taxa de entrega baseada no CEP
+     * A taxa será estimada pelo sistema da Uber no momento da finalização
+     */
+    async function calculateDeliveryFee() {
+      const cepInput = document.getElementById('customer-cep');
+      const deliveryFeeText = document.getElementById('delivery-fee-text');
+      const cep = cepInput.value.replace(/\D/g, '');
+      
+      if (cep.length !== 8) {
+        deliveryFeeText.textContent = 'Informe um CEP válido';
+        deliveryFee = 0;
+        updateCartDisplay();
+        return;
+      }
+      
+      deliveryFeeText.textContent = 'Validando CEP...';
+      
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+        
+        if (data.erro || data.uf !== 'RJ') {
+          deliveryFeeText.textContent = 'CEP inválido ou fora da área de entrega';
+          deliveryFee = 0;
+          updateCartDisplay();
+          return;
+        }
+        
+        // Taxa será calculada pela Uber no momento da finalização
+        deliveryFee = 0;
+        deliveryFeeText.innerHTML = '✓ CEP válido<br><span style="font-size: 12px; color: #c9b8a8; font-weight: 400;">Taxa será calculada pela Uber no WhatsApp</span>';
+        updateCartDisplay();
+        
+      } catch (error) {
+        deliveryFeeText.textContent = 'Erro ao validar CEP';
+        deliveryFee = 0;
+        updateCartDisplay();
+      }
+    }
+
+    /**
+     * Lista de bairros onde fazemos entrega
+     */
+    const DELIVERY_NEIGHBORHOODS = [
+      'Abolição',
+      'água santa',
+      'agua santa',
+      'Campinho',
+      'Cascadura',
+      'Madureira',
+      'Piedade',
+      'Pilares',
+      'Quintino',
+      'Quintino bocaiuva',
+      'Sulacap',
+      'Vila Valqueire'
+    ];
+
+    /**
+     * Verifica se o bairro está na lista de entregas
+     * @param {string} bairro - Nome do bairro
+     * @returns {boolean} - true se entregamos no bairro
+     */
+    function isDeliveryNeighborhood(bairro) {
+      const normalizedBairro = bairro.toLowerCase().trim();
+      return DELIVERY_NEIGHBORHOODS.some(neighborhood => 
+        normalizedBairro.includes(neighborhood) || neighborhood.includes(normalizedBairro)
+      );
+    }
+
+    /**
+     * Valida o CEP usando a API ViaCEP
+     * Verifica se o CEP existe, se pertence ao Rio de Janeiro (RJ) e se o bairro está na área de entrega
+     * @returns {Promise<boolean>} - true se o CEP é válido, false caso contrário
+     */
+    async function validateCEP() {
+      const cepInput = document.getElementById('customer-cep');
+      const cepError = document.getElementById('cep-error');
+      const addressInput = document.getElementById('customer-address');
+      const cep = cepInput.value.replace(/\D/g, '');
+
+      // Resetar estilos
+      cepInput.style.borderColor = '#4a3428';
+      cepError.style.display = 'none';
+
+      if (cep.length !== 8) {
+        return false;
+      }
+
+      try {
+        // Consultar API ViaCEP
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        // CEP não encontrado
+        if (data.erro) {
+          cepError.textContent = 'CEP não encontrado';
+          cepError.style.display = 'block';
+          cepInput.style.borderColor = '#ff4444';
+          addressInput.value = '';
+          return false;
+        }
+
+        // Validar se é do Rio de Janeiro
+        if (data.uf !== 'RJ') {
+          cepError.textContent = 'Desculpe, só entregamos no Rio de Janeiro (RJ)';
+          cepError.style.display = 'block';
+          cepInput.style.borderColor = '#ff4444';
+          addressInput.value = '';
+          return false;
+        }
+
+        // Validar se o bairro está na área de entrega
+        if (!isDeliveryNeighborhood(data.bairro)) {
+          cepError.innerHTML = `Desculpe, não entregamos em ${data.bairro}.<br>Entregamos apenas em: Abolição, Água Santa, Campinho, Cascadura, Madureira, Piedade, Pilares, Quintino, Sulacap e Valqueire.`;
+          cepError.style.display = 'block';
+          cepInput.style.borderColor = '#ff4444';
+          addressInput.value = '';
+          return false;
+        }
+
+        // CEP válido e bairro na área de entrega - preencher endereço automaticamente
+        cepError.style.display = 'none';
+        cepInput.style.borderColor = '#25d366';
+        
+        if (data.logradouro) {
+          addressInput.value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - RJ`;
+        } else {
+          addressInput.value = `${data.bairro}, ${data.localidade} - RJ`;
+        }
+
+        return true;
+      } catch (error) {
+        cepError.textContent = 'Erro ao validar CEP. Tente novamente.';
+        cepError.style.display = 'block';
+        cepInput.style.borderColor = '#ff4444';
+        addressInput.value = '';
+        return false;
+      }
+    }
+
+    // ==========================================
+    // SEÇÃO: Integração com WhatsApp
+    // ARQUIVO: scripts/whatsapp.js
+    // ==========================================
+    
+    /**
+     * Envia o pedido para o WhatsApp da loja
+     * Valida o CEP antes de enviar e formata a mensagem com os dados do pedido
+     * @param {Event} event - Evento de submit do formulário
+     */
+    async function sendToWhatsApp(event) {
+      event.preventDefault();
+
+      if (cart.length === 0) return;
+
+      // Verificar se a loja está aberta
+      if (!isStoreOpen()) {
+        showToast('❌ Desculpe, estamos fechados no momento. Volte no horário de funcionamento!');
+        return;
+      }
+
+      // Validar CEP antes de enviar
+      const isValidCEP = await validateCEP();
+      if (!isValidCEP) {
+        return;
+      }
+
+      // Coletar dados do formulário
+      const customerName = document.getElementById('customer-name').value;
+      const customerCEP = document.getElementById('customer-cep').value;
+      const customerAddress = document.getElementById('customer-address').value;
+      const customerComplement = document.getElementById('customer-complement').value.trim();
+      const addressType = document.getElementById('address-type').value;
+      const customerPhone = document.getElementById('customer-phone').value;
+      const paymentMethod = document.getElementById('payment-method').value;
+      const selectedDeliveryType = document.getElementById('delivery-type').value;
+      const orderNotes = document.getElementById('order-notes').value.trim();
+      
+      // Validar se um tipo de entrega foi selecionado
+      if (!selectedDeliveryType) {
+        showToast('❌ Por favor, selecione um tipo de entrega');
+        return;
+      }
+
+      // Formatar forma de pagamento
+      const paymentLabels = {
+        'pix': '💰 PIX',
+        'debito': '💳 Cartão de Débito',
+        'credito': '💳 Cartão de Crédito'
+      };
+      const paymentLabel = paymentLabels[paymentMethod] || paymentMethod;
+
+      // Formatar tipo de endereço
+      const addressTypeLabels = {
+        'casa': '🏠 Casa',
+        'trabalho': '💼 Trabalho',
+        'outros': '📍 Outros'
+      };
+      const addressTypeLabel = addressTypeLabels[addressType] || addressType;
+
+      // Formatar tipo de entrega
+      const deliveryTypeLabels = {
+        'uber': '🚗 Uber Envios',
+        'combinar': '💬 A Combinar'
+      };
+      const deliveryTypeLabel = deliveryTypeLabels[selectedDeliveryType] || selectedDeliveryType;
+
+      // Montar mensagem formatada para WhatsApp
+      let message = `*Novo Pedido - ${config.store_name || defaultConfig.store_name}*%0A%0A`;
+      message += `*Código do Pedido:* ${orderCode}%0A%0A`;
+      message += `*Cliente:* ${customerName}%0A`;
+      message += `*Telefone:* ${customerPhone}%0A`;
+      message += `*CEP:* ${customerCEP}%0A`;
+      message += `*Endereço:* ${customerAddress}%0A`;
+      
+      // Adicionar complemento se houver
+      if (customerComplement) {
+        message += `*Complemento:* ${customerComplement}%0A`;
+      }
+      
+      message += `*Tipo de Endereço:* ${addressTypeLabel}%0A`;
+      message += `*Tipo de Entrega:* ${deliveryTypeLabel}%0A`;
+      message += `*Forma de Pagamento:* ${paymentLabel}%0A`;
+      
+      // Adicionar observações se houver
+      if (orderNotes) {
+        message += `*Observações:* ${orderNotes.replace(/\n/g, ' ')}%0A`;
+      }
+      
+      message += `%0A*Itens do Pedido:*%0A`;
+
+      // Adicionar itens do carrinho
+      cart.forEach(item => {
+        message += `• ${item.quantity}x ${item.name} - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}%0A`;
+      });
+
+      // Adicionar subtotal e informações de entrega
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      message += `%0A*Subtotal dos Produtos:* R$ ${subtotal.toFixed(2).replace('.', ',')}%0A`;
+      
+      if (selectedDeliveryType === 'uber') {
+        message += `*Taxa de Entrega:* A calcular pela Uber%0A`;
+        message += `%0A*Total dos Produtos: R$ ${subtotal.toFixed(2).replace('.', ',')}*%0A`;
+        message += `_(Taxa de entrega será adicionada pela Uber)_`;
+      } else if (selectedDeliveryType === 'combinar') {
+        message += `%0A*Total: R$ ${subtotal.toFixed(2).replace('.', ',')}*%0A`;
+        message += `_(Entrega a combinar)_`;
+      } else {
+        message += `%0A*Total: R$ ${subtotal.toFixed(2).replace('.', ',')}*`;
+      }
+
+      // Abrir WhatsApp em nova aba
+      const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    // ==========================================
+    // SEÇÃO: Atualização de Configuração
+    // ARQUIVO: scripts/config-update.js
+    // ==========================================
+    
+    /**
+     * Atualiza a interface quando a configuração é alterada
+     * @param {Object} newConfig - Nova configuração
+     */
+    async function onConfigChange(newConfig) {
+      config = { ...newConfig };
+      
+      // Atualizar nome da loja
+      const storeName = config.store_name || defaultConfig.store_name;
+      document.getElementById('navbar-brand-name').textContent = storeName;
+      document.getElementById('store-tagline').textContent = config.store_tagline || defaultConfig.store_tagline;
+      
+      // Atualizar Instagram
+      const instagramHandle = config.instagram_handle || defaultConfig.instagram_handle;
+      document.getElementById('instagram-handle').textContent = instagramHandle;
+      document.getElementById('instagram-link').href = `https://instagram.com/${instagramHandle.replace('@', '')}`;
+      
+      // Atualizar horários
+      document.getElementById('weekday-hours').textContent = config.weekday_hours || defaultConfig.weekday_hours;
+      document.getElementById('saturday-hours').textContent = config.saturday_hours || defaultConfig.saturday_hours;
+      document.getElementById('sunday-hours').textContent = config.sunday_hours || defaultConfig.sunday_hours;
+      
+      // Atualizar textos da página Sobre
+      document.getElementById('about-story').textContent = config.about_story || defaultConfig.about_story;
+      document.getElementById('location-text').textContent = config.location_text || defaultConfig.location_text;
+      
+      // Atualizar rodapé
+      document.getElementById('footer-description').textContent = config.footer_description || defaultConfig.footer_description;
+      document.getElementById('footer-text').textContent = config.footer_text || defaultConfig.footer_text;
+      
+      // Atualizar WhatsApp no rodapé
+      const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+      const formattedPhone = whatsappNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      document.getElementById('footer-whatsapp').textContent = formattedPhone;
+      document.getElementById('footer-whatsapp').href = `https://wa.me/${whatsappNumber}`;
+      
+      // Atualizar Instagram no rodapé
+      document.getElementById('footer-instagram').textContent = instagramHandle;
+      document.getElementById('footer-instagram').href = `https://instagram.com/${instagramHandle.replace('@', '')}`;
+    }
+
+    // ==========================================
+    // SEÇÃO: Inicialização do SDK do Canva
+    // ARQUIVO: scripts/sdk-init.js
+    // ==========================================
+    
+    /**
+     * Inicializa o Element SDK do Canva
+     * Permite que o código seja editável através da interface do Canva
+     */
+    function toggleChatbot() {
+      const chatbotModal = document.getElementById('chatbot-modal');
+      const chatbotIcon = document.getElementById('chatbot-icon');
+      
+      if (chatbotModal.classList.contains('active')) {
+        chatbotModal.classList.remove('active');
+        chatbotIcon.textContent = '🐱‍👓';
+      } else {
+        chatbotModal.classList.add('active');
+        chatbotIcon.textContent = '✕';
+      }
+    }
+
+    const chatbotAnswers = {
+      horario: {
+        question: '🕐 Qual o horário de funcionamento?',
+        answer: 'Miau! 🐱‍👓 Nosso horário de funcionamento é:\n\n📅 Segunda a Sexta: 09h às 18h\n📅 Sábado: Fechado\n📅 Domingo: Fechado\n\nEstamos sempre prontos para adoçar seu dia! 🍫'
+      },
+      entrega: {
+        question: '🚚 Como funciona a entrega?',
+        answer: function() {
+          const cartSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+          const MINIMUM_ORDER = 30.00;
+          const remaining = MINIMUM_ORDER - cartSubtotal;
+          
+          let response = 'Miau! 😺 Fazemos entregas nos seguintes bairros: 🏙️\n\n📍 Abolição, Água Santa, Campinho, Cascadura, Madureira, Piedade, Pilares, Quintino, Sulacap e Valqueire\n\n';
+          
+          if (cartSubtotal === 0) {
+            response += '💰 Pedido mínimo: R$ 30,00\n📦 Seu carrinho está vazio ainda!\n\n';
+          } else if (cartSubtotal < MINIMUM_ORDER) {
+            response += `💰 Pedido mínimo: R$ 30,00\n📦 Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')}\n⚠️ Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para atingir o mínimo!\n\n`;
+          } else {
+            response += `💰 Pedido mínimo: R$ 30,00\n✅ Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')} - Pedido OK!\n\n`;
+          }
+          
+          response += 'Finalize seu pedido pelo WhatsApp e informe seu endereço! 🐾';
+          
+          return response;
+        }
+      },
+      pagamento: {
+        question: '💳 Quais formas de pagamento?',
+        answer: 'Miau! 😺 Aceitamos diversas formas de pagamento:\n\n💳 Cartão de crédito e débito\n💵 Dinheiro\n📱 PIX\n\nO pagamento é feito na entrega ou você pode pagar antecipado via PIX. Escolha a opção mais conveniente para você! 🐾'
+      },
+      ingredientes: {
+        question: '🥜 Contém ingredientes alergênicos?',
+        answer: 'Miau! 😺 Nossos brownies podem conter:\n\n🥜 Nozes e amendoim\n🥛 Leite e derivados\n🌾 Glúten\n🥚 Ovos\n\nSe você tem alguma alergia específica, entre em contato pelo WhatsApp antes de fazer seu pedido. Sua segurança é nossa prioridade! ❤️🐾'
+      },
+      validade: {
+        question: '📅 Qual a validade dos brownies?',
+        answer: 'Miau! 😺 Nossos brownies são feitos fresquinhos! 🍫\n\n📅 Validade: 5 dias em temperatura ambiente\n❄️ Na geladeira: até 10 dias\n🧊 No freezer: até 30 dias\n\nDica do Bem: Aqueça por 15 segundos no micro-ondas para deixar ainda mais gostoso! 🐾'
+      },
+      pedido: {
+        question: '📦 Qual o pedido mínimo?',
+        answer: function() {
+          const cartSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+          const MINIMUM_ORDER = 30.00;
+          const remaining = MINIMUM_ORDER - cartSubtotal;
+          
+          let response = 'Miau! 😺 O pedido mínimo é de R$ 30,00 🛵\n\n';
+          
+          if (cartSubtotal === 0) {
+            response += '📦 Seu carrinho está vazio!\n💡 Dica: Aproveite nosso Brownie do Dia com 10% OFF!\n\n';
+          } else if (cartSubtotal < MINIMUM_ORDER) {
+            response += `📦 Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')}\n⚠️ Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para o mínimo!\n💡 Dica: Aproveite nosso Brownie do Dia com 10% OFF para completar!\n\n`;
+          } else {
+            response += `✅ Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')} - Tudo certo!\n🎉 Você já pode finalizar seu pedido!\n\n`;
+          }
+          
+          response += 'Finalize seu pedido pelo WhatsApp! 🐾';
+          
+          return response;
+        }
+      }
+    };
+
+    function askQuestion(questionType) {
+      const messagesContainer = document.getElementById('chatbot-messages');
+      const answer = chatbotAnswers[questionType];
+      
+      if (!answer) return;
+
+      const userMessage = document.createElement('div');
+      userMessage.className = 'chatbot-message user';
+      userMessage.innerHTML = `
+        <div class="chatbot-message-avatar">👤</div>
+        <div class="chatbot-message-content">
+          <p>${answer.question}</p>
+        </div>
+      `;
+      messagesContainer.appendChild(userMessage);
+
+      setTimeout(() => {
+        // Se a resposta é uma função, executá-la para obter o texto dinâmico
+        const answerText = typeof answer.answer === 'function' ? answer.answer() : answer.answer;
+        
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chatbot-message bot';
+        botMessage.innerHTML = `
+          <div class="chatbot-message-avatar">🐱‍👓</div>
+          <div class="chatbot-message-content">
+            <p>${answerText.replace(/\n/g, '<br>')}</p>
+          </div>
+        `;
+        messagesContainer.appendChild(botMessage);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }, 500);
+
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["store_name", config.store_name || defaultConfig.store_name],
+          ["store_tagline", config.store_tagline || defaultConfig.store_tagline],
+          ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number],
+          ["instagram_handle", config.instagram_handle || defaultConfig.instagram_handle],
+          ["weekday_hours", config.weekday_hours || defaultConfig.weekday_hours],
+          ["saturday_hours", config.saturday_hours || defaultConfig.saturday_hours],
+          ["sunday_hours", config.sunday_hours || defaultConfig.sunday_hours],
+          ["about_story", config.about_story || defaultConfig.about_story],
+          ["location_text", config.location_text || defaultConfig.location_text],
+          ["footer_description", config.footer_description || defaultConfig.footer_description],
+          ["footer_text", config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99b6e2a4c5eef390',t:'MTc2MjYyMzkzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+ </html>
+
