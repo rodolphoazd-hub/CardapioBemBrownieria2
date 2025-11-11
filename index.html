@@ -114,8 +114,8 @@
     }
 
     .navbar-logo {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -1261,7 +1261,7 @@
       }
 
       .products-grid {
-        gap: 10px;
+        gap: 20px;
       }
 
       .product-card {
@@ -1842,9 +1842,9 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
         // Domingo - Fechado
         return false;
       } else if (day >= 1 && day <= 5) {
-        // Segunda a Sexta: 09h - 18h
-        const openTime = 10 * 60; // 09:00
-        const closeTime = 20 * 60; // 18:00
+        // Segunda a Sexta: 09h - 17h
+        const openTime = 9 * 60; // 09:00
+        const closeTime = 17 * 60; // 17:00
         return currentTime >= openTime && currentTime < closeTime;
       } else if (day === 6) {
         // Sábado: 10h - 18h
@@ -2155,7 +2155,7 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
                 <span class="cart-quantity-display">${item.quantity}</span>
                 <button class="cart-quantity-btn" onclick="increaseCartQuantity('${item.id}')">+</button>
               </div>
-              <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remover</button>
+              <button class="remove-btn" onclick="removeFromCart('${item.id}')">Esvaziar Carrinho</button>
             </div>
           </div>
         `).join('');
@@ -2285,18 +2285,18 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
      * Lista de bairros onde fazemos entrega
      */
     const DELIVERY_NEIGHBORHOODS = [
-      'Abolição',
+      'abolição',
       'água santa',
       'agua santa',
       'Campinho',
-      'Cascadura',
-      'Madureira',
-      'Piedade',
-      'Pilares',
-      'Quintino',
-      'Quintino bocaiuva',
-      'Sulacap',
-      'Vila Valqueire'
+      'cascadura',
+      'madureira',
+      'piedade',
+      'pilares',
+      'quintino',
+      'quintino bocaiuva',
+      'sulacap',
+      'vila Valqueire'
     ];
 
     /**
@@ -2571,7 +2571,7 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
     const chatbotAnswers = {
       horario: {
         question: '🕐 Qual o horário de funcionamento?',
-        answer: 'Miau! 🐱‍👓 Nosso horário de funcionamento é:\n\n📅 Segunda a Sexta: 09h às 18h\n📅 Sábado: Fechado\n📅 Domingo: Fechado\n\nEstamos sempre prontos para adoçar seu dia! 🍫'
+        answer: 'Miau! 🐱‍👓 Nosso horário de funcionamento é:\n\n📅 Segunda a Sexta: 09h às 17h\n📅 Sábado: Fechado\n📅 Domingo: Fechado\n\nEstamos sempre prontos para adoçar seu dia! 🍫'
       },
       entrega: {
         question: '🚚 Como funciona a entrega?',
