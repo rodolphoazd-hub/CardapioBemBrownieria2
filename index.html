@@ -394,7 +394,7 @@
     }
 
     .product-description {
-      font-size: 12px;
+      font-size: 14px;
       color: #c9b8a8;
       margin: 0 0 12px 0;
       line-height: 1.4;
@@ -1224,6 +1224,12 @@
        ============================================ */
     
     /* Mobile Optimizations */
+
+    @media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr; /* Empilhar os produtos */
+  }
+}
     @media (max-width: 480px) {
       .navbar-brand {
         font-size: 16px;
@@ -1265,7 +1271,7 @@
       }
 
       .product-card {
-        padding: 10px;
+        padding: 20px;
       }
 
       .product-image {
