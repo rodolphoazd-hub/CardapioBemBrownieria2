@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brownieria - Cardápio Digital</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <script src="/_sdk/element_sdk.js"></script>
   <style>
     /* ============================================
@@ -371,6 +372,32 @@
       display: flex;
       flex-direction: column;
     }
+       .produto-caracteristicas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .caracteristica {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 9px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .observacoes-input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #F5DEB3;
+            border-radius: 5px;
+            font-size: 11px;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+        }
 
     .product-header {
       display: flex;
@@ -394,14 +421,16 @@
     }
 
     .product-description {
-      font-size: 14px;
-      color: #c9b8a8;
-      margin: 0 0 12px 0;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+  
+    font-size: 12px;
+    color: #c9b8a8;
+    margin: 0 0 16px 0; 
+    line-height: 1.6; 
+    display: block;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: normal; 
+
     }
 
     .product-actions {
@@ -1390,6 +1419,11 @@
       <div class="product-card"><img src="assets/tradicional.png" alt="Brownie Tradicional" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+          <div class="produto-caracteristicas">
+            <span class="caracteristica">Cacau 50% </span>
+            <span class="caracteristica">Chocolate 50%</span>
+             <span class="caracteristica">Aprox 60g</span>
+        </div>
          <h3 class="product-name">Brownie Tradicional</h3><span class="product-price">R$ 10,90</span>
         </div>
         <p class="product-description">Um brownie irresistível, feito com cacau 50% e pedaços de chocolate 50%, que realçam o sabor intenso e autêntico do chocolate nobre.</p>
@@ -1402,6 +1436,13 @@
       <div class="product-card"><img src="assets/brownie nuts.png" alt="Mix Nuts" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+            <div class="produto-caracteristicas">
+            <span class="caracteristica">Cacau 50% </span>
+             <span class="caracteristica">Castanha Torrada</span>
+             <span class="caracteristica">Frutas Secas: Damasco & uvas Passas</span>
+            <span class="caracteristica">Chocolate 50%</span>
+            
+        </div>
          <h3 class="product-name">Brownie Mix Nuts </h3><span class="product-price">R$ 12,90</span>
         </div>
         <p class="product-description">Brownie de cacau 50% com nuts torrados e frutas secas- uma opção mais saudável, que unem o sabor intenso, crocância e equilíbrio nutritivo.</p>
@@ -1419,6 +1460,12 @@
       <div class="product-card"><img src="assets/chocobjinho.png" alt="Brownie Beijinho" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+          <div class="produto-caracteristicas">
+            <span class="caracteristica">Beijinho de colher </span>
+             <span class="caracteristica">Leite de coco e flocos de coco</span>
+            <span class="caracteristica">Chocolate 50%</span> 
+             <span class="caracteristica">Aprox 90g</span>
+        </div>
          <h3 class="product-name">Brownie Beijinho</h3><span class="product-price">R$ 17,00</span>
         </div>
         <p class="product-description">Brownie intenso de chocolate, leite de coco e flocos de coco, recheado com beijinho de colher, em um sabor marcante do cacau e a suavidade do coco.</p>
@@ -1431,6 +1478,11 @@
       <div class="product-card"><img src="assets/Brigadeiro.png" alt="Brownie Brigadeiro" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+          <div class="produto-caracteristicas">
+             <span class="caracteristica">Brigadeiro Cremoso</span>
+            <span class="caracteristica">Chocolate Meio Amargo 50%</span> 
+             <span class="caracteristica">Aprox 90g</span>
+        </div>
          <h3 class="product-name">Brownie Brigadeiro</h3><span class="product-price">R$ 17,00</span>
         </div>
         <p class="product-description">Brownie recheado com brigadeiro cremoso de chocolate meio amargo 50%, realçando o sabor  do chocolate nobre.</p>
@@ -1443,6 +1495,12 @@
       <div class="product-card"><img src="assets/docedeleite.png" alt="Doce de Leite" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+            <div class="produto-caracteristicas">
+            <span class="caracteristica">Doce de Leite artesanal </span>
+              <span class="caracteristica">Chocolate 50%</span> 
+             <span class="caracteristica">Aprox 90g</span>
+          
+        </div>
          <h3 class="product-name">Brownie de Doce de Leite</h3><span class="product-price">R$ 19,00</span>
         </div>
         <p class="product-description">Brownie clássico de chocolate nobre, com um recheio generoso de doce de leite artesanal.</p>
@@ -1455,6 +1513,11 @@
       <div class="product-card"><img src="assets/chocolatebranco.png" alt="Chocolate branco" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+            <div class="produto-caracteristicas">
+            <span class="caracteristica">Chocolate Branco </span>
+            <span class="caracteristica">Chocolate 50%</span>
+             <span class="caracteristica">Aprox 90g</span> 
+        </div>
          <h3 class="product-name">Brownie Chocolate Branco</h3><span class="product-price">R$ 19,00</span>
         </div>
         <p class="product-description">Brownie recheado recheado com um cremoso e suave chocolate branco. Uma explosão de sabor em cada pedaço!</p>
@@ -1471,11 +1534,19 @@
      <h2 class="section-title">Brownies Especiais</h2>
      
      <div class="products-grid">
+      
       <div class="product-card"><img src="assets/brookie.png" alt="Brownie Oreo" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
-         <h3 class="product-name">Brownie Brookie</h3><span class="product-price">R$ 15,00</span>
+           
+        <div class="produto-caracteristicas">
+            <span class="caracteristica">Brownie + Cookie </span>
+            <span class="caracteristica">Açúcar Mascavo </span>
+            <span class="caracteristica">Chocolate 70% </span>
+             <span class="caracteristica">Aprox 80g</span>
         </div>
+
+        <h3 class="product-name">Brownie Brookie</h3><span class="product-price">R$ 15,00</span>
         <p class="product-description">Brownie + Cookie= base de cookie e massa de brownie, feito com açúcar mascavo e chocolate 70%, recheado com gotas de chocolate.</p>
         <div class="product-actions">
          <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('oreo')">−</button> <span class="quantity-display" id="qty-oreo">0</span> <button class="quantity-btn" onclick="increaseQuantity('oreo')">+</button>
@@ -1483,12 +1554,18 @@
         </div>
        </div>
       </div>
-    
+    </div>
       
       
       <div class="product-card"><img src="assets/nutella.png" alt="Brownie Nutelíssimo" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+          <div class="produto-caracteristicas">
+            <span class="caracteristica">Intenso de chocolate 70% amargo </span>
+            <span class="caracteristica">Ganache de Nutella Original </span>
+             <span class="caracteristica">Aprox 80g</span>
+            
+        </div>
          <h3 class="product-name">Brownie Nutelíssimo</h3><span class="product-price">R$ 17,00</span>
         </div>
         <p class="product-description">Brownie intenso de chocolate amargo,  recheado com ganache de Nutella original no topo.</p>
@@ -1503,6 +1580,13 @@
       <div class="product-card"><img src="assets/red.png" alt="Brownie RedVelvet Cream Chesse" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+
+          <div class="produto-caracteristicas">
+            <span class="caracteristica">RedVelvet Cream Chesse </span>
+            <span class="caracteristica">Raspas de limão </span>
+            <span class="caracteristica">Chocolate 70% </span>
+             <span class="caracteristica">Aprox 80g</span>
+        </div>
          <h3 class="product-name">Brownie RedVelvet Cream Chesse </h3><span class="product-price">R$ 18,00</span>
         </div>
         <p class="product-description">Brownie inspirado no famoso Red Velvet com chocolate amargo,marmorizado com cream cheese delicadamente saborizado com raspas de limão.</p>
@@ -1515,6 +1599,12 @@
       <div class="product-card"><img src="assets/pistache.png" alt="Brownie Morango" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+          <div class="produto-caracteristicas">
+            <span class="caracteristica">Brownie intenso Chocolate Branco</span>
+            <span class="caracteristica">Ganache de Pistache </span>
+             <span class="caracteristica">Aprox 80g</span>
+           
+        </div>
          <h3 class="product-name">Blondie Pistacchio</h3><span class="product-price">R$ 19,00</span>
         </div>
         <p class="product-description">Brownie intenso de chocolate branco, combinado com pistache torrado e finalizado com um delicioso ganache de pistache no topo. Uma experiência rica e sofisticada em cada pedaço!</p>
@@ -1532,6 +1622,12 @@
       <div class="product-card"><img src="assets/Bites de brownies.jpg" alt="Bites de Brownie Chocolate" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+          <div class="produto-caracteristicas">
+           
+            <span class="caracteristica">Casquinha de Chocolate</span>
+            <span class="caracteristica">Chocolate 50% </span>
+             <span class="caracteristica">Aprox 80g</span>
+        </div>
          <h3 class="product-name">Bites de Brownie Chocolate</h3><span class="product-price">R$ 9,90</span>
         </div>
         <p class="product-description">Uma combinação perfeita de brownie de chocolate 50% de textura macia e fudgy com uma casquinha de chocolate blend que derrete na boca.</p>
@@ -1542,38 +1638,42 @@
        </div>
       </div>
    
-      <div class="product-card"><img src="assets/minicookie.png" alt="Mini Cookies Tradicional" class="product-image" onerror="this.style.display='none';">
-       <div class="product-content">
-        <div class="product-header">
-         <h3 class="product-name">Mini Cookies Tradicional</h3><span class="product-price">R$ 6,90</span>
-        </div>
-        <p class="product-description">Deliciosos mini cookies com o sabor suave da baunilha, o toque especial do açúcar mascavo e irresistíveis gotas de chocolate ao leite.</p>
-        <div class="product-actions">
-         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('bbt')">−</button> <span class="quantity-display" id="qty-bbt">0</span> <button class="quantity-btn" onclick="increaseQuantity('bbt')">+</button>
-         </div><button class="add-to-cart-btn" onclick="addToCart('bbt', 'Mini Cookies Tradicional', 6.90)">Adicionar</button>
-        </div>
-       </div>
-      </div>
+    
       </div>
 
-      <h2 class="section-title">Delicias no Pote</h2>
+      <h2 class="section-title">Delicias no Pote - 200g </h2>
 
      <div class="products-grid">
-      <div class="product-card"><img src="assets/abf.JPG" alt="Afogadinho Brownie Ferrero" class="product-image" onerror="this.style.display='none';">
+      <div class="product-card"><img src="assets/Afogadinho Brownie semmao.png" alt="Afogadinho Brownie Ferrero" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+            <div class="produto-caracteristicas">
+            <span class="caracteristica">Amendoim picado crocante </span>
+             <span class="caracteristica">Creme de avelãs</span>
+            <span class="caracteristica">Chocolate meio amargo</span> 
+             <span class="caracteristica">Aprox 150g</span>
+        </div>
          <h3 class="product-name">Afogadinho Brownie Ferrero</h3><span class="product-price">R$ 25,90</span>
         </div>
-        <p class="product-description">Uma deliciosa combinação de brownie, coberto com um cremoso creme de chocolate meio amargo, amendoim picado crocante e um toque suave de creme de avelãs. Uma explosão de sabores e texturas que vai conquistar seu paladar.</p>
+        <p class="product-description">Uma deliciosa combinação de brownie, coberto com um cremoso creme de chocolate meio amargo,
+           amendoim picado crocante e um toque suave de creme de avelãs.
+           Uma explosão de sabores e texturas que vai conquistar seu paladar.</p>
         <div class="product-actions">
          <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('abf')">−</button> <span class="quantity-display" id="qty-abf">0</span> <button class="quantity-abf" onclick="increaseQuantity('abf')">+</button>
          </div><button class="add-to-cart-btn" onclick="addToCart('abf', 'Afogadinho Brownie Ferrero', 25.90)">Adicionar</button>
         </div>
        </div>
       </div>
-      <div class="product-card"><img src="assets/abnm.JPG" alt="Afogadinho Brownie Ninho e Morango" class="product-image" onerror="this.style.display='none';">
+      <div class="product-card"><img src="assets/Afogadinho Brownie F2.png" alt="Afogadinho Brownie Ninho e Morango" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
+           
+            <div class="produto-caracteristicas">
+            <span class="caracteristica">Geleia de morango artesanal</span>
+             <span class="caracteristica">Camada cremosa de leite ninho</span>
+            <span class="caracteristica">Pedaços frescos de morango picados</span> 
+             <span class="caracteristica">Aprox 150g</span>
+        </div>
          <h3 class="product-name">Afogadinho Brownie Ninho e Morango</h3><span class="product-price">R$ 25,90</span>
         </div>
         <p class="product-description">Uma camada cremosa de leite ninho, envolta por uma geleia de morango artesanal, pedaços frescos de morango picados e finalizado com um irresistível topo de brownie.</p>
@@ -1583,32 +1683,53 @@
         </div>
        </div>
       </div>
-      <div class="product-card"><img src="assets/abu.JPG" alt="Afogadinho Brownie Uva" class="product-image" onerror="this.style.display='none';">
+      <div class="product-card"><img src="assets/tortinha de limão se.png" alt="Tortinha de Limão" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
-         <h3 class="product-name">Afogadinho Brownie Uva</h3><span class="product-price">R$ 25,90</span>
+           <div class="produto-caracteristicas">
+            <span class="caracteristica">Mousse aerada de limão</span>
+             <span class="caracteristica">Raspas de limão</span>
+            <span class="caracteristica">Base crocante de biscoito</span> 
+             <span class="caracteristica">Aprox 150g</span>
         </div>
-        <p class="product-description">Delicioso brownie coberto com camadas cremosas de leite ninho,brigadeiro meio amargo derretido e pedaços de uva picados, criando uma combinação única de sabores e texturas que derretem na boca.</p>
+         <h3 class="product-name">Tortinha de Limão </h3><span class="product-price">R$ 25,90</span>
+        </div>
+        <p class="product-description">Base crocante de biscoito, mousse aerada de limão, chantininho fresco e raspas de limão. Uma combinação leve e refrescante, do doce ao cítrico, em cada camada.</p>
         <div class="product-actions">
          <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('abu')">−</button> <span class="quantity-display" id="qty-abu">0</span> <button class="quantity-btn" onclick="increaseQuantity('abu')">+</button>
-         </div><button class="add-to-cart-btn" onclick="addToCart('abu', 'Afogadinho Brownie Uva', 25.90)">Adicionar</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('abu', 'Tortinha de Limão', 25.90)">Adicionar</button>
         </div>
        </div>
       </div>
-      <div class="product-card"><img src="assets/abm.JPG" alt="Afogadinho Brownie Morango" class="product-image" onerror="this.style.display='none';">
-       <div class="product-content">
+     <div class="product-card">
+    <img src="assets/tortinha de maracujá.png" alt="Tortinha de Maracujá" class="product-image" onerror="this.style.display='none';">
+    <div class="product-content">
         <div class="product-header">
-         <h3 class="product-name">Afogadinho Brownie Morango</h3><span class="product-price">R$ 25,90</span>
+            <div class="produto-caracteristicas">
+                <span class="caracteristica">Base crocante de Biscoito</span>
+                <span class="caracteristica">Mousse aerada de Maracujá</span>
+                <span class="caracteristica">Calda de Maracujá</span>
+                <span class="caracteristica">Aprox 150g</span>
+            </div>
+            <h3 class="product-name">Tortinha de Maracujá</h3><span class="product-price">R$ 25,90</span>
         </div>
-        <p class="product-description">Uma camada cremosa de leite ninho, envolta por creme ninho e brigadeiro de chocolate 50%, pedaços frescos de fruta e finalizado com um irresistível topo de brownie e morangos .</p>
+       
+            <p class="product-description">
+                Uma base crocante de biscoito, delicada mousse de maracujá e calda artesanal que trazem uma explosão de sabor tropical. Finalizada com chantininho fresco, criando uma sobremesa leve e refrescante em cada camada.
+            </p>
+        </div>
         <div class="product-actions">
-         <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('abm')">−</button> <span class="quantity-display" id="qty-abm">0</span> <button class="quantity-btn" onclick="increaseQuantity('abm')">+</button>
-         </div><button class="add-to-cart-btn" onclick="addToCart('abm', 'Afogadinho Brownie Morango', 25.90)">Adicionar</button>
+            <div class="quantity-control">
+                <button class="quantity-btn" onclick="decreaseQuantity('abm')">−</button>
+                <span class="quantity-display" id="qty-abm">0</span>
+                <button class="quantity-btn" onclick="increaseQuantity('abm')">+</button>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('abm', 'Tortinha de Maracujá', 25.90)">Adicionar</button>
         </div>
-       </div>
-      </div>
-     </div>
     </div>
+</div>
+
+
    </div>
     
 
@@ -1624,7 +1745,7 @@
       <h3 class="about-title">📖 Nossa História</h3>
       <p class="about-text" id="about-story"> Nossa História - Bem Brownieria
 
-A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alta qualidade. Desde o começo, a missão foi simples: oferecer uma experiência única em cada mordida, levando para cada cliente o sabor que combina tradição e inovação.</p>
+      A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alta qualidade. Desde o começo, a missão foi simples: oferecer uma experiência única em cada mordida, levando para cada cliente o sabor que combina tradição e inovação.</p>
      </div><!-- Card: Horário de Funcionamento -->
      <div class="about-card">
       <h3 class="about-title">🕐 Horário de Funcionamento</h3>
@@ -1660,7 +1781,9 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
       <p id="footer-text">© 2025 Bem Brownieria - Feito com amor e Brownie</p>
     </div>
   </div>
-</footer>
+</footer> 
+
+
 
   </div>
   <div class="cart-float" id="cart-float" onclick="openCart()" style="display: none;"><span>🛒</span> <span>Ver Carrinho</span> <span class="cart-badge" id="cart-count">0</span>
@@ -1690,16 +1813,21 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
      <p class="cart-total-value" id="cart-total">R$ 0,00</p>
     </div>
     <form id="checkout-form" onsubmit="sendToWhatsApp(event)">
-     <div class="form-group"><label class="form-label" for="customer-name">Seu Nome</label> <input type="text" id="customer-name" class="form-input" placeholder="Digite seu nome" required>
+     
+     <div class="form-group">
+      <label class="form-label" for="customer-name">Seu Nome</label><input type="text" id="customer-name" class="form-input" placeholder="Digite seu nome" required>
      </div>
-     <div class="form-group"><label class="form-label" for="customer-cep">CEP</label> <input type="text" id="customer-cep" class="form-input" placeholder="00000-000" maxlength="9" required>
+
+     <div class="form-group">
+      <label class="form-label" for="customer-cep">CEP</label>
+       <input type="text" id="customer-cep" class="form-input" placeholder="00000-000" maxlength="9" required>
       <p id="cep-error" style="color: #ff4444; font-size: 12px; margin: 4px 0 0 0; display: none;">Desculpe, só entregamos no Rio de Janeiro (RJ)</p>
      </div>
      <div class="form-group"><label class="form-label" for="customer-address">Endereço de Entrega</label> <input type="text" id="customer-address" class="form-input" placeholder="Rua, número, bairro" required>
      </div>
      <div class="form-group"><label class="form-label" for="customer-complement">Complemento (Opcional)</label> <input type="text" id="customer-complement" class="form-input" placeholder="Apartamento, bloco, ponto de referência, etc.">
      </div>
-     <div class="form-group"><label class="form-label" for="address-type">Tipo de Endereço</label> <select id="address-type" class="form-input" required> <option value="">Selecione o tipo de endereço</option> <option value="casa">🏠 Casa</option> <option value="trabalho">💼 Trabalho</option> <option value="outros">📍 Outros</option> </select>
+     <div class="form-group"  id="address-fields"><label class="form-label" for="address-type">Tipo de Endereço</label> <select id="address-type" class="form-input" required> <option value="">Selecione o tipo de endereço</option> <option value="casa">🏠 Casa</option> <option value="trabalho">💼 Trabalho</option> <option value="outros">📍 Outros</option> </select>
      </div>
      <div class="form-group"><label class="form-label" for="delivery-type">Tipo de Entrega</label> <select id="delivery-type" class="form-input" required onchange="handleDeliveryTypeChange(this.value)"> <option value="">Selecione o tipo de entrega</option> <option value="uber">🚗 Uber Envios</option> <option value="combinar">💬 A Combinar com Vendedor</option> </select>
      </div>
@@ -1709,8 +1837,21 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
       <p style="margin: 8px 0 0 0; font-size: 12px; color: #c9b8a8;">A taxa será calculada pelo sistema da Uber ao finalizar</p>
       <p style="margin: 8px 0 0 0; font-size: 12px; color: #ffd4a3; font-weight: 600;">⚠️ A taxa de entrega será somada ao preço dos produtos</p>
      </div>
-     <div id="delivery-info-combinar" style="display: none; background: #2d1f1a; border-radius: 12px; padding: 16px; margin: 20px 0; border-left: 4px solid #d4a574;">
-      <p style="margin: 0; font-size: 14px; color: #ffd4a3; font-weight: 600; margin-bottom: 8px;">📦 Informações de Entrega</p>
+     
+     <div id="delivery-info-combinar" 
+     style="
+     display: none;
+     background: #2d1f1a;
+     border-radius: 12px;
+     padding: 16px;
+     margin: 20px 0;
+     border-left: 4px solid #d4a574;">
+
+      <p style="margin: 0;
+       font-size: 14px;
+       color: #ffd4a3;
+       font-weight: 600;
+       margin-bottom: 8px;">📦 Informações de Entrega</p>
       <p style="margin: 0; font-size: 13px; color: #c9b8a8; line-height: 1.6;">A entrega é a combinar. Converse com nossos vendedores para combinar o formato de entrega que melhor atende você!</p>
      </div>
      <div class="form-group"><label class="form-label" for="customer-phone">Telefone</label> <input type="tel" id="customer-phone" class="form-input" placeholder="(00) 00000-0000" required>
@@ -1721,7 +1862,7 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
      </div>
      <div id="minimum-order-warning" style="display: none; background: #8b4513; border-radius: 12px; padding: 16px; margin: 20px 0; border-left: 4px solid #ff4444;">
       <p style="margin: 0; font-size: 14px; color: #fff; font-weight: 600; margin-bottom: 8px;">⚠️ Pedido Mínimo Não Atingido</p>
-      <p style="margin: 0; font-size: 13px; color: #ffd4a3; line-height: 1.6;">O valor mínimo para pedidos é de R$ 30,00. Adicione mais itens ao carrinho!</p>
+      <p style="margin: 0; font-size: 13px; color: #ffd4a3; line-height: 1.6;">O valor mínimo para pedidos é de R$ 10,90. Adicione mais itens ao carrinho!</p>
      </div><button type="submit" class="checkout-btn" id="checkout-btn"> <span>📱</span> <span>Finalizar no WhatsApp</span> </button>
     </form>
    </div>
@@ -1901,12 +2042,12 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
       } else if (day >= 1 && day <= 5) {
         // Segunda a Sexta: 09h - 17h
         const openTime = 9 * 60; // 09:00
-        const closeTime = 17 * 60; // 17:00
+        const closeTime = 14 * 60; // 14:00
         return currentTime >= openTime && currentTime < closeTime;
       } else if (day === 6) {
         // Sábado: 10h - 12h
         const openTime = 10 * 60; // 10:00
-        const closeTime = 12 * 60; // 12:00
+        const closeTime = 17 * 60; // 12:00
         return currentTime >= openTime && currentTime < closeTime;
       }
       
@@ -2107,7 +2248,7 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
       const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
       const cartSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       const cartTotal = cartSubtotal + deliveryFee;
-      const MINIMUM_ORDER = 30.00;
+      const MINIMUM_ORDER = 10.90;
 
       // Atualizar contador do carrinho
       document.getElementById('cart-count').textContent = cartCount;
@@ -2150,7 +2291,7 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
         if (isBelowMinimum) {
           const remaining = MINIMUM_ORDER - cartSubtotal;
           minimumOrderWarning.querySelector('p:last-child').innerHTML = 
-            `O valor mínimo para pedidos é de R$ 30,00. Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para atingir o mínimo!`;
+            `O valor mínimo para pedidos é de R$ 10,90. Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para atingir o mínimo!`;
           minimumOrderWarning.style.display = 'block';
         } else {
           minimumOrderWarning.style.display = 'none';
@@ -2274,17 +2415,20 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
      * Exibe informações relevantes baseado na escolha do usuário
      * @param {string} type - Tipo de entrega selecionado
      */
-    function handleDeliveryTypeChange(type) {
+    /* function handleDeliveryTypeChange(type) {
       const deliveryFeeContainer = document.getElementById('delivery-fee-container');
       const deliveryInfoCombinar = document.getElementById('delivery-info-combinar');
+      const addressFields = document.getElementById('address-fields')
       
       deliveryType = type;
+      addressFields.style.display = 'block';
       
       if (deliveryType === 'uber') {
         deliveryFeeContainer.style.display = 'block';
         deliveryInfoCombinar.style.display = 'none';
         calculateDeliveryFee();
       } else if (deliveryType === 'combinar') {
+        addressFields.style.display = 'none'; 
         deliveryFeeContainer.style.display = 'none';
         deliveryInfoCombinar.style.display = 'block';
         deliveryFee = 0;
@@ -2295,7 +2439,55 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
         deliveryFee = 0;
         updateCartDisplay();
       }
-    }
+    } */
+
+    /**
+ * Manipula a mudança do tipo de entrega
+ * Exibe informações relevantes baseado na escolha do usuário
+ * @param {string} type - Tipo de entrega selecionado
+ */
+function handleDeliveryTypeChange(type) {
+  const deliveryFeeContainer = document.getElementById('delivery-fee-container');
+  const deliveryInfoCombinar = document.getElementById('delivery-info-combinar');
+  const addressFields = document.getElementById('customer-cep'); // Container dos campos de endereço (CEP, endereço, complemento)
+  const addressComplement = document.getElementById('customer-complement');
+  const addressAddress = document.getElementById('customer-address');
+  const addressType = document.getElementById('address-type');
+
+
+
+
+
+  deliveryType = type;
+  
+  // Esconde os campos de endereço e CEP por padrão
+  addressFields.style.display = 'block'; // Reset para mostrar os campos (caso necessário)
+  
+  if (deliveryType === 'uber') {
+    // Exibe a taxa de entrega do Uber
+    deliveryFeeContainer.style.display = 'block';
+    deliveryInfoCombinar.style.display = 'none';
+    calculateDeliveryFee(); // Função para calcular a taxa de entrega
+  } else if (deliveryType === 'combinar') {
+    // Exibe informações para combinar com o vendedor
+    deliveryFeeContainer.style.display = 'none';
+    deliveryInfoCombinar.style.display = 'block';
+    addressFields.style.display = 'block';
+   
+
+
+
+    deliveryFee = 0;
+    updateCartDisplay(); // Função para atualizar o display do carrinho
+  }  else {
+    // Caso de outro tipo de entrega
+    deliveryFeeContainer.style.display = 'none';
+    deliveryInfoCombinar.style.display = 'none';
+    deliveryFee = 0;
+    updateCartDisplay(); // Atualiza o carrinho
+  }
+}
+
 
     /**
      * Calcula a taxa de entrega baseada no CEP
@@ -2353,7 +2545,9 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
       'quintino',
       'quintino bocaiuva',
       'sulacap',
-      'vila Valqueire'
+      'vila Valqueire',
+      'taquara',
+      'jardim sulacap'
     ];
 
     /**
@@ -2634,17 +2828,17 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
         question: '🚚 Como funciona a entrega?',
         answer: function() {
           const cartSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-          const MINIMUM_ORDER = 30.00;
+          const MINIMUM_ORDER = 10.00;
           const remaining = MINIMUM_ORDER - cartSubtotal;
           
           let response = 'Miau! 😺 Fazemos entregas nos seguintes bairros: 🏙️\n\n📍 Abolição, Água Santa, Campinho, Cascadura, Madureira, Piedade, Pilares, Quintino, Sulacap e Valqueire\n\n';
           
           if (cartSubtotal === 0) {
-            response += '💰 Pedido mínimo: R$ 30,00\n📦 Seu carrinho está vazio ainda!\n\n';
+            response += '💰 Pedido mínimo: R$ 10,90\n📦 Seu carrinho está vazio ainda!\n\n';
           } else if (cartSubtotal < MINIMUM_ORDER) {
-            response += `💰 Pedido mínimo: R$ 30,00\n📦 Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')}\n⚠️ Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para atingir o mínimo!\n\n`;
+            response += `💰 Pedido mínimo: R$ 10,90\n📦 Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')}\n⚠️ Faltam R$ ${remaining.toFixed(2).replace('.', ',')} para atingir o mínimo!\n\n`;
           } else {
-            response += `💰 Pedido mínimo: R$ 30,00\n✅ Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')} - Pedido OK!\n\n`;
+            response += `💰 Pedido mínimo: R$ 10,90\n✅ Seu carrinho: R$ ${cartSubtotal.toFixed(2).replace('.', ',')} - Pedido OK!\n\n`;
           }
           
           response += 'Finalize seu pedido pelo WhatsApp e informe seu endereço! 🐾';
@@ -2668,10 +2862,10 @@ A Bem Brownieria nasceu da paixão genuína por criar brownies artesanais de alt
         question: '📦 Qual o pedido mínimo?',
         answer: function() {
           const cartSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-          const MINIMUM_ORDER = 30.00;
+          const MINIMUM_ORDER = 10.90;
           const remaining = MINIMUM_ORDER - cartSubtotal;
           
-          let response = 'Miau! 😺 O pedido mínimo é de R$ 30,00 🛵\n\n';
+          let response = 'Miau! 😺 O pedido mínimo é de R$ 10,90 🛵\n\n';
           
           if (cartSubtotal === 0) {
             response += '📦 Seu carrinho está vazio!\n💡 Dica: Aproveite nosso Brownie do Dia com 10% OFF!\n\n';
