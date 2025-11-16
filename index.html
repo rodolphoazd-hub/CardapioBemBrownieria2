@@ -2050,12 +2050,12 @@
   if (day === 0) {
     // Domingo - Defina o horário de funcionamento (Ex: 09h - 16h)
     const openTime = 9 * 60; // 09:00
-    const closeTime = 16 * 60; // 20:00
+    const closeTime = 20 * 60; // 20:00
     return currentTime >= openTime && currentTime < closeTime;
   } else if (day >= 1 && day <= 5) {
     // Segunda a Sexta: 09h - 17h
     const openTime = 9 * 60; // 09:00
-    const closeTime = 17 * 60; // 17:00
+    const closeTime = 20 * 60; // 20:00
     return currentTime >= openTime && currentTime < closeTime;
   } else if (day === 6) {
     // Sábado: 10h - 12h
