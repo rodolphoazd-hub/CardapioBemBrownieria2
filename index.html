@@ -2040,30 +2040,32 @@
      * Verifica se a loja está aberta no momento atual
      * @returns {boolean} - true se a loja está aberta, false se está fechada
      */
-    function isStoreOpen() {
-      const now = new Date();
-      const day = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const currentTime = hours * 60 + minutes;
+   function isStoreOpen() {
+  const now = new Date();
+  const day = now.getDay(); // 0 = Domingo, 1 = Segunda, ..., 6 = Sábado
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const currentTime = hours * 60 + minutes;
 
-      if (day === 0) {
-        // Domingo - Fechado
-        return false;
-      } else if (day >= 1 && day <= 5) {
-        // Segunda a Sexta: 09h - 17h
-        const openTime = 9 * 60; // 09:00
-        const closeTime = 14 * 60; // 14:00
-        return currentTime >= openTime && currentTime < closeTime;
-      } else if (day === 6) {
-        // Sábado: 10h - 12h
-        const openTime = 9 * 60; // 09:00
-        const closeTime = 12 * 60; // 12:00
-        return currentTime >= openTime && currentTime < closeTime;
-      }
-      
-      return false;
-    }
+  if (day === 0) {
+    // Domingo - Defina o horário de funcionamento (Ex: 09h - 16h)
+    const openTime = 9 * 60; // 09:00
+    const closeTime = 16 * 60; // 16:00
+    return currentTime >= openTime && currentTime < closeTime;
+  } else if (day >= 1 && day <= 5) {
+    // Segunda a Sexta: 09h - 17h
+    const openTime = 9 * 60; // 09:00
+    const closeTime = 17 * 60; // 17:00
+    return currentTime >= openTime && currentTime < closeTime;
+  } else if (day === 6) {
+    // Sábado: 10h - 12h
+    const openTime = 10 * 60; // 10:00
+    const closeTime = 12 * 60; // 12:00
+    return currentTime >= openTime && currentTime < closeTime;
+  }
+
+  return false;
+}
 
     /**
      * Verifica se a loja está aberta com base no horário atual
