@@ -353,6 +353,8 @@
       transition: transform 0.2s;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
     }
 
     .product-card:active {
@@ -365,7 +367,16 @@
       border-radius: 8px;
       object-fit: cover;
       margin-bottom: 12px;
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+      cursor: pointer; /* Indica que a imagem pode ser clicada */
+      object-fit: cover;
     }
+    .product-card:hover .product-image {
+     transform: scale(1.1); /* Aumenta a imagem em 10% */
+    }
+
 
     .product-content {
       flex: 1;
@@ -1596,7 +1607,7 @@
         </div>
        </div>
       </div>
-      <div class="product-card"><img src="assets/pistache.png" alt="Brownie Morango" class="product-image" onerror="this.style.display='none';">
+      <div class="product-card"><img src="assets/pistachee 2.jpg" alt="Brownie Morango" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
           <div class="produto-caracteristicas">
@@ -1637,8 +1648,6 @@
         </div>
        </div>
       </div>
-   
-    
       </div>
 
       <h2 class="section-title">Delicias no Pote - 200g </h2>
@@ -1651,7 +1660,7 @@
             <span class="caracteristica">Amendoim picado crocante </span>
              <span class="caracteristica">Creme de avelãs</span>
             <span class="caracteristica">Chocolate meio amargo</span> 
-             <span class="caracteristica">Aprox 150g</span>
+             <span class="caracteristica">Aprox 170g</span>
         </div>
          <h3 class="product-name">Afogadinho Brownie Ferrero</h3><span class="product-price">R$ 25,90</span>
         </div>
@@ -1664,7 +1673,7 @@
         </div>
        </div>
       </div>
-      <div class="product-card"><img src="assets/Afogadinho Brownie F2.png" alt="Afogadinho Brownie Ninho e Morango" class="product-image" onerror="this.style.display='none';">
+      <div class="product-card"><img src="assets/ninho.png" alt="Afogadinho Brownie Ninho e Morango" class="product-image" onerror="this.style.display='none';">
        <div class="product-content">
         <div class="product-header">
            
@@ -1672,7 +1681,7 @@
             <span class="caracteristica">Geleia de morango artesanal</span>
              <span class="caracteristica">Camada cremosa de leite ninho</span>
             <span class="caracteristica">Pedaços frescos de morango picados</span> 
-             <span class="caracteristica">Aprox 150g</span>
+             <span class="caracteristica">Aprox 170g</span>
         </div>
          <h3 class="product-name">Afogadinho Brownie Ninho e Morango</h3><span class="product-price">R$ 25,90</span>
         </div>
@@ -1692,12 +1701,12 @@
             <span class="caracteristica">Base crocante de biscoito</span> 
              <span class="caracteristica">Aprox 150g</span>
         </div>
-         <h3 class="product-name">Tortinha de Limão </h3><span class="product-price">R$ 25,90</span>
+         <h3 class="product-name">Tortinha de Limão </h3><span class="product-price">R$ 21,90</span>
         </div>
         <p class="product-description">Base crocante de biscoito, mousse aerada de limão, chantininho fresco e raspas de limão. Uma combinação leve e refrescante, do doce ao cítrico, em cada camada.</p>
         <div class="product-actions">
          <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('abu')">−</button> <span class="quantity-display" id="qty-abu">0</span> <button class="quantity-btn" onclick="increaseQuantity('abu')">+</button>
-         </div><button class="add-to-cart-btn" onclick="addToCart('abu', 'Tortinha de Limão', 25.90)">Adicionar</button>
+         </div><button class="add-to-cart-btn" onclick="addToCart('abu', 'Tortinha de Limão', 21.90)">Adicionar</button>
         </div>
        </div>
       </div>
@@ -1711,7 +1720,7 @@
                 <span class="caracteristica">Calda de Maracujá</span>
                 <span class="caracteristica">Aprox 150g</span>
             </div>
-            <h3 class="product-name">Tortinha de Maracujá</h3><span class="product-price">R$ 25,90</span>
+            <h3 class="product-name">Tortinha de Maracujá</h3><span class="product-price">R$ 21,90</span>
         </div>
        
             <p class="product-description">
@@ -1724,7 +1733,7 @@
                 <span class="quantity-display" id="qty-abm">0</span>
                 <button class="quantity-btn" onclick="increaseQuantity('abm')">+</button>
             </div>
-            <button class="add-to-cart-btn" onclick="addToCart('abm', 'Tortinha de Maracujá', 25.90)">Adicionar</button>
+            <button class="add-to-cart-btn" onclick="addToCart('abm', 'Tortinha de Maracujá', 21.90)">Adicionar</button>
   </div>
     </div>
       </div>
@@ -1965,7 +1974,7 @@
         name: 'Blondie Pistacchio',
         description: 'Brownie intenso de chocolate branco, combinado com pistache torrado e finalizado com um delicioso ganache de pistache no topo. Uma experiência rica e sofisticada em cada pedaço!.',
         price: 19.00,
-        image: 'assets/pistache.png'
+        image: 'assets/pistachee 2.jpg'
       },
       {
         id: 'redvelvet',
