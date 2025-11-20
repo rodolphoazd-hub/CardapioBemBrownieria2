@@ -1530,7 +1530,7 @@
         </div>
 
         <h3 class="product-name">Brownie Brookie</h3><span class="product-price">R$ 15,00</span>
-        <p class="product-description">Brownie + Cookie= base de cookie e massa de brownie, feito com açúcar mascavo e chocolate 70%, recheado com gotas de chocolate.</p>
+        <p class="product-description"> Brownie + Cookie = Base de cookie e massa de brownie, feito com açúcar mascavo e chocolate 70%, recheado com gotas de chocolate.</p>
         <div class="product-actions">
          <div class="quantity-control"><button class="quantity-btn" onclick="decreaseQuantity('oreo')">−</button> <span class="quantity-display" id="qty-oreo">0</span> <button class="quantity-btn" onclick="increaseQuantity('oreo')">+</button>
          </div><button class="add-to-cart-btn" onclick="addToCart('oreo', 'Brownie Brookie', 15.00)">Adicionar</button>
@@ -1868,18 +1868,25 @@
      margin: 20px 0;
      border-left: 4px solid #d4a574;">
 
-      <p style="margin: 0;
-       font-size: 14px;
-       color: #ffd4a3;
-       font-weight: 600;
-       margin-bottom: 8px;">📦 Informações de Entrega</p>
-      <p style="margin: 0; font-size: 13px; color: #c9b8a8; line-height: 1.6;">A entrega é a combinar. Converse com nossos vendedores para combinar o formato de entrega que melhor atende você!</p>
+    <p style="margin: 0;
+    font-size: 14px;
+    color: #ffd4a3;
+    font-weight: 600;
+    margin-bottom: 8px;">📦 Informações de Entrega</p>
+    
+    <p style="margin: 0; font-size: 13px; color: #c9b8a8; line-height: 1.6;">
+      A entrega é a combinar. Converse com nossos vendedores para combinar o formato de entrega que melhor atende você!</p>
      </div>
-     <div class="form-group"><label class="form-label" for="customer-phone">Telefone</label> <input type="tel" id="customer-phone" class="form-input" placeholder="(00) 00000-0000" required>
+     <div class="form-group"><label class="form-label" for="customer-phone">
+      Telefone</label>
+       <input type="tel" id="customer-phone" class="form-input" placeholder="(00) 00000-0000" required>
      </div>
-     <div class="form-group"><label class="form-label" for="payment-method">Forma de Pagamento</label> <select id="payment-method" class="form-input" required> <option value="">Selecione uma opção</option> <option value="pix">💰 PIX</option> <option value="debito">💳 Cartão de Débito</option> <option value="credito">💳 Cartão de Crédito</option> </select>
+     <div class="form-group">
+      <label class="form-label" for="payment-method">Forma de Pagamento</label> <select id="payment-method" class="form-input" required> <option value="">Selecione uma opção</option> <option value="pix">💰 PIX</option> <option value="debito">💳 Cartão de Débito</option> <option value="credito">💳 Cartão de Crédito</option> </select>
      </div>
-     <div class="form-group"><label class="form-label" for="order-notes">Observações (Opcional)</label> <textarea id="order-notes" class="form-input" placeholder="Ex: Sem nozes, retirar às 15h, etc." rows="3" style="resize: vertical; min-height: 60px;"></textarea>
+     <div class="form-group">
+      <label class="form-label" for="order-notes">Observações (Opcional)</label>
+       <textarea id="order-notes" class="form-input" placeholder="Ex: Sem nozes, retirar às 15h, etc." rows="3" style="resize: vertical; min-height: 60px;"></textarea>
      </div>
      <div id="minimum-order-warning" style="display: none; background: #8b4513; border-radius: 12px; padding: 16px; margin: 20px 0; border-left: 4px solid #ff4444;">
       <p style="margin: 0; font-size: 14px; color: #fff; font-weight: 600; margin-bottom: 8px;">⚠️ Pedido Mínimo Não Atingido</p>
@@ -1981,7 +1988,7 @@
       {
         id: 'docedeleite',
         name: 'Tortinha de Limão',
-        description: '>Base crocante de biscoito, mousse aerada de limão, chantininho fresco e raspas de limão. Uma combinação leve e refrescante, do doce ao cítrico, em cada camada.',
+        description: 'Brownie + Cookie = Base crocante de biscoito, mousse aerada de limão, chantininho fresco e raspas de limão. Uma combinação leve e refrescante, do doce ao cítrico, em cada camada.',
         price: 18.90,
         image: 'assets/tortinha de limão se.png'
       },
